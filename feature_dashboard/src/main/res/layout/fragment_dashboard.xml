@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/dashboardFragment"
+    android:background="#FFFFFF"
+    android:gravity="bottom"
+    tools:context=".presentation.ui.DashboardFragment"
+    app:umanoDragView="@id/dragView"
+    app:umanoPanelHeight="26dp"
+    app:umanoShadowHeight="0dp"
+    app:umanoOverlay="true"
+    >
+
+     <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+         <!--        Top Bar-->
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:id="@+id/top_bar"
+             android:layout_width="match_parent"
+             android:layout_height="50dp"
+             android:background="@color/black"
+             app:layout_constraintTop_toTopOf="parent">
+
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:paddingStart="20dp"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent">
+
+                 <TextView
+                     android:id="@+id/userName"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="Hello, User"
+                     android:textColor="@color/white"
+                     android:textSize="20sp"
+                    />
+
+                 <ImageView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:paddingTop="3dp"
+                     android:paddingStart="2dp"
+                     android:src="@drawable/baseline_arrow_forward_ios_24"
+                     android:tint="@color/white"></ImageView>
+             </LinearLayout>
+
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:paddingVertical="10dp"
+                 android:paddingEnd="20dp"
+                 android:scaleType="fitXY"
+                 android:src="@drawable/baseline_person_24"
+                 android:tint="@color/white"
+                 app:layout_constraintEnd_toEndOf="parent" />
+
+         </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--         Full screen Story View Pager-->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/story_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+            </androidx.viewpager2.widget.ViewPager2>
+
+<!--         Content layout-->
+         <LinearLayout
+             android:id="@+id/contentLayout"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             app:layout_constraintTop_toBottomOf="@+id/top_bar">
+
+<!--         Advertisement List RecyclerView-->
+             <com.facebook.shimmer.ShimmerFrameLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="20dp"
+                 android:id="@+id/adShimmer"
+                 >
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="horizontal"
+                     >
+
+                     <include layout="@layout/ad_placeholder" />
+
+                     <include layout="@layout/ad_placeholder" />
+
+                     <include layout="@layout/ad_placeholder" />
+
+                     <include layout="@layout/ad_placeholder" />
+                 </LinearLayout>
+
+             </com.facebook.shimmer.ShimmerFrameLayout>
+             <androidx.recyclerview.widget.RecyclerView
+                 android:id="@+id/adList"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="20dp"
+                 android:clipToPadding="false"
+                 android:visibility="gone"
+                 android:paddingStart="24dp"
+                 android:paddingEnd="24dp" />
+
+             <!--  Cards View-->
+             <com.facebook.shimmer.ShimmerFrameLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="320dp"
+                 android:id="@+id/cardShimmer">
+                 <androidx.constraintlayout.widget.ConstraintLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:paddingTop="20dp"
+
+                     >
+
+                     <View
+                         android:layout_width="220dp"
+                         android:layout_height="280dp"
+                         android:background="@drawable/card_placeholder_background"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
+                         android:layout_marginTop="30dp"/>
+
+                     <View
+                         android:layout_width="220dp"
+                         android:layout_height="260dp"
+                         android:layout_marginStart="70dp"
+                         android:alpha="0.6"
+                         android:background="@drawable/card_placeholder_background"
+                         app:layout_constraintBottom_toBottomOf="parent"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent" />
+                 </androidx.constraintlayout.widget.ConstraintLayout>
+             </com.facebook.shimmer.ShimmerFrameLayout>
+
+             <androidx.viewpager2.widget.ViewPager2
+                 android:id="@+id/cardPager"
+                 android:layout_width="match_parent"
+                 android:layout_height="320dp"
+                 android:layout_marginTop="20dp"
+                 android:paddingHorizontal="110dp"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/adList"
+                 app:layout_constraintVertical_bias="0.0"
+                 tools:layout_editor_absoluteX="0dp"
+                 android:visibility="gone"/>
+
+<!--             Circular Graph-->
+             <LinearLayout
+                 android:id="@+id/progressLayout"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:visibility="gone"
+                 android:layout_marginTop="10dp">
+                 <com.ramijemli.percentagechartview.PercentageChartView
+                     android:id="@+id/percentageView"
+                     android:layout_width="160dp"
+                     android:layout_height="180dp"
+                     app:pcv_mode="ring"
+                     app:pcv_orientation="clockwise"
+                     app:pcv_animDuration="1000"
+                     app:pcv_animInterpolator="accelerate"
+                     app:pcv_drawBackgroundBar="true"
+                     android:layout_marginStart="30dp"
+                     app:pcv_backgroundBarColor="#15000000"
+                     app:pcv_progress="0"
+                     app:pcv_progressColor="#00FF00"
+                     app:pcv_startAngle="90"
+                     app:pcv_textColor="@color/black"
+                     app:pcv_textSize="28sp"
+                     app:pcv_textStyle="bold"
+                     android:visibility="invisible"
+                     >
+                 </com.ramijemli.percentagechartview.PercentageChartView>
+
+                 <androidx.constraintlayout.widget.ConstraintLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:orientation="vertical">
+
+                     <TextView
+                         android:id="@+id/textView"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:paddingTop="20dp"
+                         android:text="Spending Analysis"
+                         android:textColor="@color/black"
+                         android:textSize="22sp"
+                         android:textStyle="bold"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent" />
+
+                     <LinearLayout
+                         android:id="@+id/linearLayout"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         app:layout_constraintTop_toBottomOf="@+id/textView">
+
+                         <TextView
+                             android:id="@+id/textView2"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:paddingStart="25dp"
+                             android:paddingTop="8dp"
+                             android:text="Your Score:"
+                             android:textColor="@color/black"
+                             android:textSize="18sp" />
+
+                         <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:paddingStart="20dp"
+                             android:paddingTop="8dp"
+                             android:text="8.5"
+                             android:textAlignment="center"
+                             android:textColor="#00FF00"
+                             android:textSize="22sp"
+                             android:textStyle="bold" />
+                     </LinearLayout>
+
+                     <LinearLayout
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:orientation="horizontal"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         android:layout_marginTop="20dp"
+                         android:layout_marginEnd="20dp"
+                         android:id="@+id/modalBtn"
+                         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+                         <TextView
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="Go to Analysis"
+                             android:textColor="@color/material_blue"
+                             android:textSize="18sp" />
+
+                         <ImageView
+                             android:layout_width="wrap_content"
+                             android:paddingTop="3dp"
+                             android:layout_height="17dp"
+                             android:src="@drawable/baseline_arrow_forward_ios_24"
+                             android:tint="@color/material_blue"/>
+                     </LinearLayout>
+                 </androidx.constraintlayout.widget.ConstraintLayout>
+             </LinearLayout>
+
+             <com.facebook.shimmer.ShimmerFrameLayout
+                 android:id="@+id/progressShimmer"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="15dp"
+                 >
+                 <include layout="@layout/progress_placeholder"/>
+             </com.facebook.shimmer.ShimmerFrameLayout>
+         </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    Drag panel-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dragView"
+        android:orientation="vertical"
+        >
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/contentPager"
+            >
+        </androidx.viewpager2.widget.ViewPager2>
+    </LinearLayout>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

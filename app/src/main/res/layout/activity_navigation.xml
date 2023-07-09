@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/parent_container"
+    android:orientation="vertical"
+    tools:context=".app.presentation.NavigationActivity">
+
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/navigation_wallpaper">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView3"-->
+<!--            android:layout_width="198dp"-->
+<!--            android:layout_height="200dp"-->
+<!--            android:elevation="2dp"-->
+<!--            android:scaleType="fitXY"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/wallpaper"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:srcCompat="@drawable/home_background1" />-->
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/top_bar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:background="@color/black"-->
+<!--            >-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal">-->
+<!--&lt;!&ndash;                            <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:layout_height="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:paddingStart="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:paddingVertical="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:scaleType="fitXY"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:src="@drawable/baseline_person_24"&ndash;&gt;-->
+<!--&lt;!&ndash;                                android:tint="@color/white">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            </ImageView>&ndash;&gt;-->
+<!--                <ImageView-->
+<!--                    android:layout_width="150dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:paddingStart="50dp"-->
+<!--                    android:src="@drawable/tyme_logo"-->
+<!--                    tools:layout_editor_absoluteX="29dp"-->
+<!--                    tools:layout_editor_absoluteY="0dp" />-->
+<!--            </LinearLayout>-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/wallpaper"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="150dp"-->
+<!--            android:background="@color/yellow_tyme"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/top_bar"-->
+<!--            tools:layout_editor_absoluteX="0dp">-->
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/slogan"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="vertical"-->
+<!--                android:paddingTop="10dp"-->
+<!--                android:paddingStart="20dp">-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/aladin"-->
+<!--                    android:text="Take Your"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="24sp" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="20dp"-->
+<!--                    android:fontFamily="@font/aladin"-->
+<!--                    android:text="Money Everywhere"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="24sp"-->
+<!--                    />-->
+<!--            </LinearLayout>-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/white">-->
+
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/alex_brush"-->
+<!--                android:paddingStart="30dp"-->
+<!--                android:paddingBottom="5dp"-->
+<!--                android:text="Hello, User"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="36sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent" />-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/navHostFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/app_navigation"
+        tools:layout="@layout/fragment_dashboard" />
+
+</LinearLayout>

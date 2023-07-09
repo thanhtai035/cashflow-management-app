@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+    Copyright 2016 Dmytro Zaitsev
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<resources>
+    <declare-styleable name="RadarChartView">
+        <attr name="startColor" format="color" />
+        <attr name="endColor" format="color" />
+        <attr name="axisColor" format="color" />
+        <attr name="parts" format="integer" />
+        <attr name="axisMax" format="float" />
+        <attr name="axisTick" format="float" />
+        <attr name="axisWidth" format="dimension" />
+        <attr name="chartColor" format="color" />
+        <attr name="chartWidth" format="dimension" />
+        <attr name="chartStyle" format="enum">
+            <enum name="fill" value="0" />
+            <enum name="stroke" value="1" />
+            <enum name="fill_and_stroke" value="2" />
+        </attr>
+        <attr name="textSize" format="dimension" />
+        <attr name="circlesOnly" format="boolean" />
+        <attr name="autoSize" format="boolean" />
+        <attr name="smoothGradient" format="boolean" />
+    </declare-styleable>
+</resources>
