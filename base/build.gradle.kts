@@ -58,8 +58,6 @@ kotlin {
 }
 
 dependencies {
-    // See Dependency management section in the README.md
-    // https://github.com/igorwojda/android-showcase#dependency-management
     api(libs.kotlin)
     api(libs.playCore)
     api(libs.coreKtx)
@@ -86,7 +84,7 @@ dependencies {
     api(libs.bundles.navigation)
     api(libs.bundles.lifecycle)
     api(libs.bundles.compose)
-    
+
     testImplementation(libs.bundles.test)
     testRuntimeOnly(libs.junitJupiterEngine)
 }
