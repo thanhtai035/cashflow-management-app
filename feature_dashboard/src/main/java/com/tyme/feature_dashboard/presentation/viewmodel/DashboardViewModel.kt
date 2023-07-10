@@ -21,56 +21,23 @@ class DashboardViewModel (
 
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(DashboardState())
     val _transaction: MutableLiveData<Result<List<TransactionWeek>>> = MutableLiveData()
     val _user: MutableLiveData<Result<User>> = MutableLiveData()
 
-    val state : State<DashboardState> = _state
-
     fun initialize() {
         getUser(Constant.TEST_USER_ID)
-        getTransactionMonth(Constant.TEST_USER_ID)
+        //getTransaction(Constant.TEST_USER_ID)
     }
 
     private fun getUser(userID: String) {
         getUserUseCase(userID).onEach { result ->
             _user.postValue(result)
-//            when (result) {
-//                is Result.Success -> {
-//                    _user.postValue(Result.Success(result.data))
-//                }
-//                is Result.Error -> {
-//                    _user.postValue(Result.Error(result.message?: "Unexpected Error"))
-//                }
-//                is Result.Loading -> {
-//                    _user.postValue(Result.Success(result.data))
-//                }
-//            }
         }.launchIn(viewModelScope)
     }
 
-    private fun getTransactionMonth(userID: String) {
+    private fun getTransaction(userID: String) {
         getTransactionListUseCase(userID).onEach { result ->
-            when (result) {
-                is Result.Success -> {
-                    _state.value = DashboardState(transactionList = result.data)
-                }
-                is Result.Error -> {
-                    _state.value = DashboardState(message = result.message?: "Unexpected error")
-                }
-                is Result.Loading -> {
-                    _state.value = DashboardState(transactionLoading = true)
-                }
-            }
+            _transaction.postValue(result)
         }.launchIn(viewModelScope)
     }
 }
-
-data class DashboardState(
-    val transactionLoading: Boolean = false,
-    val userLoading: Boolean = false,
-
-    val message: String = "",
-    val user: User? = null,
-    val transactionList: List<TransactionWeek>? = null
-)

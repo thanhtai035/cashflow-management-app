@@ -85,11 +85,8 @@ dependencies {
     api(libs.bundles.retrofit)
     api(libs.bundles.navigation)
     api(libs.bundles.lifecycle)
-    api(libs.bundles.room)
     api(libs.bundles.compose)
-
-
+    
     testImplementation(libs.bundles.test)
-
     testRuntimeOnly(libs.junitJupiterEngine)
 }
