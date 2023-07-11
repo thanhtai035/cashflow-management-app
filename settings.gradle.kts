@@ -81,6 +81,8 @@ dependencyResolutionManagement {
             version("shimmer", "0.5.0")
             version("percentagechartview", "0.3.1")
             version("progressbar", "2.2.0")
+            version("anychart", "1.1.2")
+            version("piechart", "1.0.9")
 
             // Gradle Plugins https://plugins.gradle.org/
             plugin("android-application", "com.android.application").versionRef("androidGradlePlugin")
@@ -154,6 +156,8 @@ dependencyResolutionManagement {
             library("shimmer", "com.facebook.shimmer", "shimmer").versionRef("shimmer")
             library("percentagechartview", "com.ramijemli.percentagechartview", "percentagechartview").versionRef("percentagechartview")
             library("progressbar", "com.akexorcist", "round-corner-progress-bar").versionRef("progressbar")
+            library("anychart", "com.github.AnyChart", "AnyChart-Android").versionRef("anychart")
+            library("piechart", "com.github.furkanaskin", "ClickablePieChart").versionRef("piechart")
 
             bundle("retrofit", listOf("retrofitCore", "kotlinxSerializationConverter", "serializationJson", "okhttp", "okhttpInterceptor"))
             bundle("koin", listOf("koin", "koinNavigation"))

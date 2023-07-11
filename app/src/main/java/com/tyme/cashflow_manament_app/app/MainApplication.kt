@@ -1,13 +1,12 @@
 package com.tyme.cashflow_manament_app.app
 
 import android.app.Application
-import android.util.Log
 import com.google.android.material.color.DynamicColors
 import com.tyme.base.baseModule
 import com.tyme.cashflow_manament_app.BuildConfig
 import com.tyme.cashflow_manament_app.appModule
+import com.tyme.feature_account.featureAccountModule
 import com.tyme.feature_dashboard.featureDashboardModule
-import com.tyme.feature_history.featureHistoryModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext
@@ -33,6 +32,7 @@ class MainApplication : Application() {
 
             modules(appModule)
             modules(baseModule)
+            modules(featureAccountModule)
             modules(featureDashboardModule)
         }
     }

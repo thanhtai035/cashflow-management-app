@@ -78,6 +78,7 @@ dependencies {
     api(libs.shimmer)
     api(libs.percentagechartview)
     api(libs.progressbar)
+    api(libs.piechart)
 
     api(libs.bundles.koin)
     api(libs.bundles.retrofit)

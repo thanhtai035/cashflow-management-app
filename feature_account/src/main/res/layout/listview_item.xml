@@ -5,25 +5,23 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="12dp"
     android:layout_marginEnd="12dp"
-    android:layout_marginVertical="10dp"
-
+    android:layout_marginVertical="7dp"
     android:layout_marginHorizontal="10dp"
     app:cardCornerRadius="20dp"
-    app:cardElevation="7dp">
+    app:cardElevation="5dp">
     
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:paddingVertical="20dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="5dp"
         android:orientation="horizontal"
+        android:paddingEnd="5dp"
         android:background="@android:color/transparent"
         >
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/baseline_home_24"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="10dp"
             android:id="@+id/logo" />
 
@@ -34,13 +32,13 @@
             android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:id="@+id/issuePlace"
-                android:textSize="25dp"
-                android:layout_marginLeft="15dp"
+                android:textSize="18sp"
                 android:text="Place of Issue"
                 android:paddingStart="5dp"
+                android:paddingEnd="5dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
@@ -50,24 +48,25 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/time"
                     android:textColor="@color/black"
-                    android:textSize="18dp"
-                    android:paddingStart="20dp"
+                    android:textSize="15sp"
+                    android:paddingStart="10dp"
                     android:text="Date and Time"
                     >
                 </TextView>
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/green"
                     android:layout_alignParentEnd="true"
                     android:paddingEnd="20dp"
-                    android:textSize="25dp"
+                    android:textSize="18sp"
                     android:textAlignment="textEnd"
                     android:id="@+id/amount"
                     android:text=" USD"
@@ -77,7 +76,6 @@
                 </TextView>
             </RelativeLayout>
         </LinearLayout>
-
 
 
         </LinearLayout>

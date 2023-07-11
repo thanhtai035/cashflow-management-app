@@ -19,14 +19,18 @@
             android:layout_height="match_parent">
 
          <!--        Top Bar-->
+
+         <!--         Full screen Story View Pager-->
          <androidx.constraintlayout.widget.ConstraintLayout
              android:id="@+id/top_bar"
              android:layout_width="match_parent"
              android:layout_height="50dp"
-             android:background="@color/black"
-             app:layout_constraintTop_toTopOf="parent">
+             android:background="@android:color/transparent"
+             app:layout_constraintTop_toTopOf="parent"
+             tools:layout_editor_absoluteX="0dp">
 
              <LinearLayout
+                 android:id="@+id/accountNavigate"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:orientation="horizontal"
@@ -40,17 +44,16 @@
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:text="Hello, User"
-                     android:textColor="@color/white"
-                     android:textSize="20sp"
-                    />
+                     android:textColor="@color/black"
+                     android:textSize="18sp" />
 
                  <ImageView
                      android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:paddingTop="3dp"
+                     android:layout_height="20dp"
                      android:paddingStart="2dp"
+                     android:paddingTop="5dp"
                      android:src="@drawable/baseline_arrow_forward_ios_24"
-                     android:tint="@color/white"></ImageView>
+                     app:tint="@color/black"></ImageView>
              </LinearLayout>
 
              <ImageView
@@ -65,8 +68,7 @@
 
          </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--         Full screen Story View Pager-->
-            <androidx.viewpager2.widget.ViewPager2
+         <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/story_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -108,7 +110,7 @@
                  android:id="@+id/adList"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
-                 android:layout_marginTop="20dp"
+                 android:layout_marginTop="10dp"
                  android:clipToPadding="false"
                  android:visibility="gone"
                  android:paddingStart="24dp"
@@ -117,7 +119,7 @@
              <!--  Cards View-->
              <com.facebook.shimmer.ShimmerFrameLayout
                  android:layout_width="match_parent"
-                 android:layout_height="320dp"
+                 android:layout_height="350dp"
                  android:id="@+id/cardShimmer">
                  <androidx.constraintlayout.widget.ConstraintLayout
                      android:layout_width="match_parent"
@@ -165,11 +167,11 @@
                  android:layout_height="wrap_content"
                  android:orientation="horizontal"
                  android:visibility="gone"
-                 android:layout_marginTop="10dp">
+                 android:layout_marginTop="30dp">
                  <com.ramijemli.percentagechartview.PercentageChartView
                      android:id="@+id/percentageView"
-                     android:layout_width="160dp"
-                     android:layout_height="180dp"
+                     android:layout_width="150dp"
+                     android:layout_height="150dp"
                      app:pcv_mode="ring"
                      app:pcv_orientation="clockwise"
                      app:pcv_animDuration="1000"
@@ -228,7 +230,7 @@
                              android:paddingTop="8dp"
                              android:text="8.5"
                              android:textAlignment="center"
-                             android:textColor="#00FF00"
+                             android:textColor="#008000"
                              android:textSize="22sp"
                              android:textStyle="bold" />
                      </LinearLayout>

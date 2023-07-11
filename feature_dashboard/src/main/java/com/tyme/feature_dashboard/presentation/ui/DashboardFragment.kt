@@ -1,11 +1,9 @@
 package com.tyme.feature_dashboard.presentation.ui
 
-import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.ramijemli.percentagechartview.callback.AdaptiveColorProvider
-import com.ramijemli.percentagechartview.callback.OnProgressChangeListener
 import com.ramijemli.percentagechartview.callback.ProgressTextFormatter
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
+import com.tyme.base.Common.FragmentEnum
+import com.tyme.base.ext.FragmentListener
 import com.tyme.base_feature.common.Result
 import com.tyme.feature_dashboard.R
 import com.tyme.feature_dashboard.databinding.FragmentDashboardBinding
@@ -29,14 +28,15 @@ import com.tyme.feature_dashboard.presentation.Adapter.ContentAdapter
 import com.tyme.feature_dashboard.presentation.Adapter.StoryAdapter
 import com.tyme.feature_dashboard.presentation.util.*
 import com.tyme.feature_dashboard.presentation.viewmodel.DashboardViewModel
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     private lateinit var binding: FragmentDashboardBinding
-    private val viewModel: DashboardViewModel by sharedViewModel()
+    private val viewModel: DashboardViewModel by inject()
 
-    private var fullScreenListener: FullScreenListener? = null
+    private var fragmentListener: FragmentListener? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +51,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         super.onViewCreated(view, savedInstanceState)
         initContentPager()
         initModal()
+        binding.accountNavigate.setOnClickListener{
+            fragmentListener?.onNavigate(FragmentEnum.Account)
+        }
 
         viewModel._user.observe(viewLifecycleOwner) {
             response ->
@@ -70,7 +73,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                         initPercentageView()
                         binding.progressShimmer.stopShimmer()
                         binding.progressShimmer.visibility = View.GONE
-                    }, 5000)
+                    }, 2000)
 
                 }
                 is Result.Loading -> {
@@ -87,8 +90,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         // Verify that the activity implements the callback interface
-        if (context is FullScreenListener) {
-            fullScreenListener = context
+        if (context is FragmentListener) {
+            fragmentListener = context
         } else {
             throw IllegalArgumentException("Activity implements listener wrongly")
         }
@@ -139,7 +142,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
         // Click Ad item to open Story full-screen view
         adAdapter.setOnItemClickListener { position ->
-            fullScreenListener?.onFullScreen(true)
             binding.storyPager.visibility = View.VISIBLE
             binding.contentLayout.visibility = View.GONE
             binding.contentPager.visibility = View.GONE
@@ -162,8 +164,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             binding.contentLayout.visibility = View.VISIBLE
             binding.contentPager.visibility = View.VISIBLE
             binding.dashboardFragment.startAnimation(fadeIn)
-
-            fullScreenListener?.onFullScreen(false)
         }
     }
 
@@ -213,7 +213,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         val colorProvider: AdaptiveColorProvider = object : AdaptiveColorProvider {
             val redColor = Color.RED
             val yellowColor = Color.YELLOW
-            val greenColor = Color.GREEN
+            val greenColor = Color.parseColor("#008000")
 
             override fun provideProgressColor(progress: Float): Int {
                 if (progress < 50 && progress > 0)
@@ -227,7 +227,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             }
 
             override fun provideTextColor(progress: Float): Int {
-                return if (progress <= 50) redColor else if (progress <= 75) yellowColor else greenColor
+                return provideProgressColor(progress)
             }
 
             override fun provideBackgroundBarColor(progress: Float): Int {

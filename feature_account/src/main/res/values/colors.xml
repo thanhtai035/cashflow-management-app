@@ -12,4 +12,5 @@
     <color name="light_white">#d3d3d3 </color>
     <color name="light_yellow">#F1EB9C</color>
     <color name="green">#0CC741</color>
+    <color name="shimmer">#bbbbbb</color>
 </resources>
