@@ -79,6 +79,7 @@ dependencies {
     api(libs.percentagechartview)
     api(libs.progressbar)
     api(libs.piechart)
+    api(libs.dialog)
 
     api(libs.bundles.koin)
     api(libs.bundles.retrofit)

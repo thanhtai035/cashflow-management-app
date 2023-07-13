@@ -27,12 +27,13 @@ import com.tyme.feature_account.domain.model.TransactionDetail
 import com.tyme.feature_account.domain.model.TransactionWeek
 import com.tyme.feature_account.presentation.adapter.TransactionListAdapter
 import com.tyme.feature_account.presentation.viewmodel.TransactionState
+import org.koin.android.ext.android.inject
 import kotlin.random.Random
 
 class AccountFragment: Fragment(R.layout.account_fragment) {
     private lateinit var binding: AccountFragmentBinding
     private var fragmentListener: FragmentListener? = null
-    private val viewModel: AccountViewModel by sharedViewModel()
+    private val viewModel: AccountViewModel by inject()
 
 
     override fun onCreateView(

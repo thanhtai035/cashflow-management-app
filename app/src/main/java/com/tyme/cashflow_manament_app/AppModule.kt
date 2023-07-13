@@ -3,6 +3,10 @@ package com.tyme.cashflow_manament_app
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.tyme.base_feature.common.Constant
+import com.tyme.cashflow_manament_app.app.data.dataModule
+import com.tyme.cashflow_manament_app.app.domain.domainModule
+import com.tyme.cashflow_manament_app.app.presentation.presentationModule
+
 import kotlinx.serialization.ExperimentalSerializationApi
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -13,6 +17,9 @@ import retrofit2.Retrofit
 import timber.log.Timber
 
 val appModule = module {
+    presentationModule
+    domainModule
+    dataModule
 
 //    single { AuthenticationInterceptor(Constant.BEARER_TOKEN) }
 

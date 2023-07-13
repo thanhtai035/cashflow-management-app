@@ -83,6 +83,7 @@ dependencyResolutionManagement {
             version("progressbar", "2.2.0")
             version("anychart", "1.1.2")
             version("piechart", "1.0.9")
+            version("dialog", "1.4.0")
 
             // Gradle Plugins https://plugins.gradle.org/
             plugin("android-application", "com.android.application").versionRef("androidGradlePlugin")
@@ -158,6 +159,7 @@ dependencyResolutionManagement {
             library("progressbar", "com.akexorcist", "round-corner-progress-bar").versionRef("progressbar")
             library("anychart", "com.github.AnyChart", "AnyChart-Android").versionRef("anychart")
             library("piechart", "com.github.furkanaskin", "ClickablePieChart").versionRef("piechart")
+            library("dialog", "com.github.thomper", "sweet-alert-dialog").versionRef("dialog")
 
             bundle("retrofit", listOf("retrofitCore", "kotlinxSerializationConverter", "serializationJson", "okhttp", "okhttpInterceptor"))
             bundle("koin", listOf("koin", "koinNavigation"))

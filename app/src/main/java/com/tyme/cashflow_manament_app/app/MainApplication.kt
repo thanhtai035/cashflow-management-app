@@ -34,6 +34,7 @@ class MainApplication : Application() {
             modules(baseModule)
             modules(featureAccountModule)
             modules(featureDashboardModule)
+            modules(authenticationModule)
         }
     }
 
