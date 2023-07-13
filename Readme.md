@@ -19,8 +19,8 @@ base → Common → Constant → change value of BASE_URL
 Can be found in API Contracts (Confluence Page)
 
 ## Known bugs
-Navigate between screen fragment leads to viewmodel reset
-Not validate the user input in log in page (not empty, minimum lenght...)
+- Navigate between screen fragment leads to viewmodel reset
+- Not validate the user input in log in page (not empty, minimum lenght...)
 
 ## Complete
 Multi-module + Clean MVVM architecture set up
@@ -37,7 +37,7 @@ Multi-module + Clean MVVM architecture set up
 
 #### Transaction feature 
 - Handle Request on Loading, Error and Success for User, Advertisement API
-- Click a slice on pie chart to send request filterig the transcations by Category
+- Click a slice on pie chart to send request filtering the transcations by Category
 
 ## What to do
 - Change other fragments except Dashboard to activity as Dashboard is the navigation view to direct to other screens
