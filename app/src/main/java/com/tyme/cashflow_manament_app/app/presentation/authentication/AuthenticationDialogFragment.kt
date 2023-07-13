@@ -56,18 +56,22 @@ class AuthenticationDialogFragment : DialogFragment(R.layout.authentication_dial
 
     fun updateView() {
         when(enumValue) {
+            // Set View to Loading state
             AuthenticationDialogEnum.Loading -> {
                 binding.loadingLayout.visibility = View.VISIBLE
                 binding.errorLayout.visibility = View.GONE
                 binding.invalidLayout.visibility = View.GONE
                 dialog?.setCanceledOnTouchOutside(false) // Prevent dialog from being dismissed outside
             }
+            // Set View to Error
             AuthenticationDialogEnum.Error -> {
                 binding.loadingLayout.visibility = View.GONE
                 binding.errorLayout.visibility = View.VISIBLE
                 binding.invalidLayout.visibility = View.GONE
                 dialog?.setCanceledOnTouchOutside(true)
-            } else -> {
+            }
+            // Invalid Credential View
+            else -> {
             binding.loadingLayout.visibility = View.GONE
             binding.errorLayout.visibility = View.INVISIBLE
             binding.invalidLayout.visibility = View.VISIBLE

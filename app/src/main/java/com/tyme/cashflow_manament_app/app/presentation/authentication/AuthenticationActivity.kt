@@ -29,38 +29,45 @@ class AuthenticationActivity : BaseActivity(R.layout.activity_authentication_vie
         super.onCreate(savedInstanceState)
         binding = ActivityAuthenticationViewBinding.inflate(layoutInflater) //initializing the binding class
         setContentView(binding.root)
+
+        // Set Log in button listener
         binding.logInBtn.setOnClickListener {
             viewModel.logIn(binding.usernameInput.text.toString(), binding.passwordInput.text.toString())
         }
     }
 
     override fun onStart() {
-
-        viewModel.response.observe(this) {
-                response ->
-            when (response) {
-                is Result.Success -> {
-                    if (response.data?.success?:false) {
-                        val intent = Intent(this, NavigationActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        Handler().postDelayed({
-                            Log.d("tai", "123")
-                            modalDialogFragment.updateDialogState(AuthenticationDialogEnum.Invalid)
-                        }, 3000)
+        // Check Log in Response
+            viewModel.response.observe(this) {
+                    response ->
+                when (response) {
+                    is Result.Success -> {
+                        // Case: Valid credential
+                        if (response.data?.success?:false) {
+                            val intent = Intent(this, NavigationActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
+                        // Case: Invalid input
+                        else {
+                            Handler().postDelayed({
+                                modalDialogFragment.updateDialogState(AuthenticationDialogEnum.Invalid)
+                            }, 3000)
+                        }
                     }
+                        // On Loading - Open dialog with loading progress view
+                    is Result.Loading -> {
+                        modalDialogFragment = AuthenticationDialogFragment.newInstance(AuthenticationDialogEnum.Loading)
+                        modalDialogFragment.show(supportFragmentManager, "modalDialog")
+                    }
+                        // Error - Change dialog to error message
+                    else -> {
+                    Handler().postDelayed({
+                        Log.d("tai", "123")
+                        modalDialogFragment.updateDialogState(AuthenticationDialogEnum.Error)
+                    }, 3000)
                 }
-                is Result.Loading -> {
-                    modalDialogFragment = AuthenticationDialogFragment.newInstance(AuthenticationDialogEnum.Loading)
-                    modalDialogFragment.show(supportFragmentManager, "modalDialog")
-                } else -> {
-                Handler().postDelayed({
-                    Log.d("tai", "123")
-                    modalDialogFragment.updateDialogState(AuthenticationDialogEnum.Error)
-                }, 3000)
             }
-        }
         }
         super.onStart()
     }

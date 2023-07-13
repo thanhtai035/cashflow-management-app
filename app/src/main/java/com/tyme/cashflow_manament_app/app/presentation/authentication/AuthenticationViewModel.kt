@@ -18,6 +18,7 @@ class AuthenticationViewModel (
 {
     val response: MutableLiveData<Result<AuthenticationResponse>> = MutableLiveData()
 
+    // Get response from Log In post request
     public fun logIn(username: String, password: String) {
         getAuthenticationResponseUseCase(username, password).onEach { result ->
             response.postValue(result)

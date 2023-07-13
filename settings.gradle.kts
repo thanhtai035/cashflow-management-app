@@ -166,7 +166,6 @@ dependencyResolutionManagement {
             bundle("compose", listOf("composeUI", "toolingPreview", "lottie", "coil"))
             bundle("lifecycle", listOf("viewmodelKtx", "livedataKtx", "livedataRuntime"))
             bundle("navigation", listOf("navigationFragment", "navigationUiKtx"))
-            bundle("room", listOf("roomKtx", "roomRuntime"))
             bundle(
                 "test",
                 listOf(

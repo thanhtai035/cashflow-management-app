@@ -25,12 +25,14 @@ class NavigationActivity : BaseActivity(R.layout.activity_navigation), FragmentL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
 
+        // Change fragment
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHostFragment.navController
 
         replaceFragment(DashboardFragment())
     }
 
+    // Callback navigation from fragment
     override fun onNavigate(fragment: FragmentEnum) {
         when(fragment) {
             FragmentEnum.Dashboard -> replaceFragment(DashboardFragment())
@@ -42,6 +44,7 @@ class NavigationActivity : BaseActivity(R.layout.activity_navigation), FragmentL
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
+    // Method to change fragment
     private fun replaceFragment(fragment: Fragment) {
         val fragmentManager: FragmentManager = supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
