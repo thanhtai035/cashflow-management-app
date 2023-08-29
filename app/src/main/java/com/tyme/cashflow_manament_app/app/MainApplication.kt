@@ -6,7 +6,9 @@ import com.tyme.base.baseModule
 import com.tyme.cashflow_manament_app.BuildConfig
 import com.tyme.cashflow_manament_app.appModule
 import com.tyme.feature_account.featureAccountModule
+import com.tyme.feature_chatbot.featureChatBotModule
 import com.tyme.feature_dashboard.featureDashboardModule
+import com.tyme.feature_transaction.featureTransactionModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext
@@ -33,8 +35,10 @@ class MainApplication : Application() {
 
             modules(appModule)
             modules(baseModule)
+            modules(featureTransactionModule)
             modules(featureAccountModule)
             modules(featureDashboardModule)
+            modules(featureChatBotModule)
             modules(authenticationModule)
         }
     }

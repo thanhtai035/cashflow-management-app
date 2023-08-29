@@ -54,6 +54,10 @@ class AuthenticationDialogFragment : DialogFragment(R.layout.authentication_dial
         updateView()
     }
 
+    fun cancelDialog() {
+        dismiss()
+    }
+
     fun updateView() {
         when(enumValue) {
             // Set View to Loading state

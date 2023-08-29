@@ -13,5 +13,6 @@
     <color name="material_gray">#C8C8C8</color>
     <color name="material_blue">#2196F3</color>
     <color name="shimmer">#dddddd</color>
-
+    <color name="unselectedDotColor">#E0E0E0</color> <!-- Customize the color for unselected indicators -->
+    <color name="selectedDotColor">#888888</color>
 </resources>

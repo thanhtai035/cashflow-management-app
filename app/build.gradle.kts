@@ -1,6 +1,4 @@
-import com.android.build.api.dsl.ApplicationDefaultConfig
-
-@Suppress("DSL_SCOPE_VIOLATION") // Because of IDE bug https://youtrack.jetbrains.com/issue/KTIJ-19370
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -82,4 +80,7 @@ kotlin {
 dependencies {
     implementation(projects.featureAccount)
     implementation(projects.featureDashboard)
+    implementation(projects.featureTransaction)
+    implementation(projects.featureChatbot)
+
 }

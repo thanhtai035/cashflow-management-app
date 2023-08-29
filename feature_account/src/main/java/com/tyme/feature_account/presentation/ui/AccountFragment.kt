@@ -1,34 +1,26 @@
 package com.tyme.feature_account.presentation.ui
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.window.isPopupLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.faskn.lib.Slice
 import com.faskn.lib.buildChart
 import com.tyme.base.Common.FragmentEnum
 import com.tyme.base.ext.FragmentListener
-import com.tyme.base_feature.common.Constant
+import com.tyme.base.Common.Constant
 import com.tyme.feature_account.presentation.viewmodel.AccountViewModel
 import com.tyme.feature_history.R
 import com.tyme.feature_history.databinding.AccountFragmentBinding
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import com.tyme.base_feature.common.Result
 import com.tyme.feature_account.domain.model.TransactionDetail
 import com.tyme.feature_account.domain.model.TransactionWeek
 import com.tyme.feature_account.presentation.adapter.TransactionListAdapter
-import com.tyme.feature_account.presentation.viewmodel.TransactionState
 import org.koin.android.ext.android.inject
-import kotlin.random.Random
 
 class AccountFragment: Fragment(R.layout.account_fragment) {
     private lateinit var binding: AccountFragmentBinding
@@ -92,7 +84,6 @@ class AccountFragment: Fragment(R.layout.account_fragment) {
         }
 
         viewModel.state.observe(viewLifecycleOwner) {
-            Log.d("tai", "change")
             viewModel.getTransactionPage(Constant.TEST_USER_ID)
         }
     }
@@ -109,7 +100,6 @@ class AccountFragment: Fragment(R.layout.account_fragment) {
             binding.listShimmer.stopShimmer()
             binding.listShimmer.visibility = View.GONE
         }, 2000)
-
     }
 
     private fun initPieChart(items: List<TransactionWeek>) {

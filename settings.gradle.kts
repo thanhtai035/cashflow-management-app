@@ -5,6 +5,8 @@ include(
     ":base",
     ":feature_account",
     ":feature_dashboard",
+    ":feature_transaction",
+    ":feature_chatbot"
     )
 
 pluginManagement {
@@ -84,6 +86,9 @@ dependencyResolutionManagement {
             version("anychart", "1.1.2")
             version("piechart", "1.0.9")
             version("dialog", "1.4.0")
+            version("mpchart", "v3.1.0")
+            version("dotindicator", "1.0.3")
+            version("spinkit", "1.4.0")
 
             // Gradle Plugins https://plugins.gradle.org/
             plugin("android-application", "com.android.application").versionRef("androidGradlePlugin")
@@ -160,6 +165,9 @@ dependencyResolutionManagement {
             library("anychart", "com.github.AnyChart", "AnyChart-Android").versionRef("anychart")
             library("piechart", "com.github.furkanaskin", "ClickablePieChart").versionRef("piechart")
             library("dialog", "com.github.thomper", "sweet-alert-dialog").versionRef("dialog")
+            library("mpchart", "com.github.PhilJay", "MPAndroidChart").versionRef("mpchart")
+            library("dotindicator", "com.romandanylyk", "pageindicatorview").versionRef("dotindicator")
+            library("spinkit", "com.github.ybq", "Android-SpinKit").versionRef("spinkit")
 
             bundle("retrofit", listOf("retrofitCore", "kotlinxSerializationConverter", "serializationJson", "okhttp", "okhttpInterceptor"))
             bundle("koin", listOf("koin", "koinNavigation"))

@@ -54,7 +54,7 @@ class TransactionListAdapter(var items: List<TransactionDetail>) :
     }
 
     inner class Viewholder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val logo: ImageView = itemView.findViewById(R.id.logo)
+//        val logo: ImageView = itemView.findViewById(R.id.logo)
         val issuePlace: TextView = itemView.findViewById(R.id.issuePlace)
         val time: TextView = itemView.findViewById(R.id.time)
         val amount: TextView = itemView.findViewById(R.id.amount)

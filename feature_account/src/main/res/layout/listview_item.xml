@@ -3,12 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="12dp"
-    android:layout_marginEnd="12dp"
-    android:layout_marginVertical="7dp"
-    android:layout_marginHorizontal="10dp"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="5dp">
+   >
     
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,14 +11,15 @@
         android:paddingVertical="5dp"
         android:orientation="horizontal"
         android:paddingEnd="5dp"
+        android:paddingStart="15dp"
         android:background="@android:color/transparent"
         >
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:id="@+id/logo" />
+<!--        <ImageView-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:id="@+id/logo" />-->
 
 
         <LinearLayout
@@ -42,7 +38,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="@id/logo">
+                >
             </TextView>
 
             <RelativeLayout
@@ -77,9 +73,12 @@
             </RelativeLayout>
         </LinearLayout>
 
-
         </LinearLayout>
 
-
+        <View
+            android:layout_width="match_parent"
+            android:id="@+id/divider"
+            android:layout_height="1dp"
+            android:background="@color/shimmer"/>
 
 </androidx.cardview.widget.CardView>

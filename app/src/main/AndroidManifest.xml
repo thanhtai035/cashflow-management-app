@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -18,15 +19,22 @@
         <activity
             android:name=".app.presentation.authentication.AuthenticationActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".app.presentation.NavigationActivity"
+            android:name=".app.presentation.navigation.ui.NavigationActivity"
             android:exported="true">
+        </activity>
+        <activity
+            android:name="com.tyme.feature_transaction.presentation.ui.TransactionHistoryActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.tyme.feature_chatbot.presentation.ui.ChatBotActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

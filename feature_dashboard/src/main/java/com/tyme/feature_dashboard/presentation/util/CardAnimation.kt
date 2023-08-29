@@ -25,12 +25,11 @@ class CardAnimation(private val offscreenPageLimit: Int) : ViewPager2.PageTransf
 
             ViewCompat.setElevation(page, -abs(position))
 
-            val scaleFactor = -SCALE_FACTOR * position + DEFAULT_SCALE
+            val scaleFactor = -SCALE_FACTOR + DEFAULT_SCALE
             val alphaFactor = -ALPHA_FACTOR * position + DEFAULT_ALPHA
 
             when {
                 position <= 0f -> {
-
                     translationX = DEFAULT_TRANSLATION_X
                     scaleX = DEFAULT_SCALE
                     scaleY = DEFAULT_SCALE

@@ -80,6 +80,9 @@ dependencies {
     api(libs.progressbar)
     api(libs.piechart)
     api(libs.dialog)
+    api(libs.mpchart)
+    api(libs.dotindicator)
+    api(libs.spinkit)
 
     api(libs.bundles.koin)
     api(libs.bundles.retrofit)
