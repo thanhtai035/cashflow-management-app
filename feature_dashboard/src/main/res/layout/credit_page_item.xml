@@ -1,24 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/slide_up_background">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:text="Credit Card"
+            android:layout_height="wrap_content"
             android:gravity="top"
-            android:textAlignment="center"
-            android:textStyle="bold"
             android:paddingTop="5dp"
+            android:text="Credit Card"
+            android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!--        <LinearLayout-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="102dp"-->
+            <!--            android:orientation="horizontal">-->
+
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:orientation="vertical">-->
+
+            <!--                <Space-->
+            <!--                    android:layout_width="88dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_weight="1" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/chartName"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="40dp"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:text="chartName" />-->
+
+            <!--                <Space-->
+            <!--                    android:layout_width="91dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_weight="1" />-->
+
+            <!--            </LinearLayout>-->
+
+            <!--                        <app.futured.donut.DonutProgressView-->
+            <!--                            android:id="@+id/donut_view"-->
+            <!--                            android:layout_width="100dp"-->
+            <!--                            android:layout_height="match_parent"-->
+            <!--                            app:donut_direction="anticlockwise"-->
+            <!--                            app:donut_gapAngle="270"-->
+            <!--                            app:donut_gapWidth="10"-->
+            <!--                            app:donut_strokeWidth="16dp" />-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="0"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/chartName1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0"
+                            android:text="chartName"
+                            android:textColor="#F44336" />
+
+                        <Space
+                            android:layout_width="76dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0" />
+
+                        <LinearLayout
+                            android:id="@+id/grav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0"
+                            android:gravity="right|end"
+                            android:orientation="horizontal">
+
+                            <ToggleButton
+                                android:id="@+id/buttonChart1M1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0"
+                                android:checked="false"
+                                android:gravity="end"
+                                android:showText="true"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+
+                            <ToggleButton
+                                android:id="@+id/buttonChart1M2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="end"
+                                android:layout_weight="0"
+                                android:gravity="end"
+                                android:showText="true"
+                                android:text="Month 2"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+
+                            <ToggleButton
+                                android:id="@+id/buttonChart1M3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="end"
+                                android:layout_weight="0"
+                                android:gravity="end"
+                                android:showText="true"
+                                android:text="Month 3"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/BarChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_marginTop="5dp"
+                        android:paddingHorizontal="30dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="300dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="0"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/chartName2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0"
+                            android:text="chartName"
+                            android:textColor="#F44336" />
+
+                        <Space
+                            android:layout_width="76dp"
+                            android:layout_height="match_parent" />
+
+                        <LinearLayout
+                            android:id="@+id/chart2Button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0"
+                            android:gravity="right|end"
+                            android:orientation="horizontal">
+
+                            <ToggleButton
+                                android:id="@+id/buttonChart2M1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0"
+                                android:gravity="end"
+                                android:text="Month 1"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+
+                            <ToggleButton
+                                android:id="@+id/buttonChart2M2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="end"
+                                android:layout_weight="0"
+                                android:gravity="end"
+                                android:text="Month 2"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+
+                            <ToggleButton
+                                android:id="@+id/buttonChart2M3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="end"
+                                android:layout_weight="0"
+                                android:gravity="end"
+                                android:text="Month 3"
+                                android:textAlignment="center"
+                                android:textSize="10sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/LineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_marginTop="5dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
 
