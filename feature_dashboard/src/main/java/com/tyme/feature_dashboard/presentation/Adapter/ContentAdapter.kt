@@ -198,11 +198,16 @@ class ContentAdapter(var items: ArrayList<Int>, var transactionList: List<Transa
     fun setLineChart(dataSetEntry: List<Entry>,lineChart: LineChart) {
 
         val dataSet = LineDataSet(dataSetEntry,"My Data")
+        dataSet.setFillAlpha(75)
+        dataSet.setDrawFilled(true)
+        dataSet.setFillColor(Color.rgb(254,211,44))
+        dataSet.setColor(Color.rgb(254,211,44))
         val linedata = LineData(dataSet)
         lineChart.data = linedata
         lineChart.data.setValueTextSize(15f)
+        lineChart.data.setValueTextColor(Color.rgb(254,211,44))
         lineChart.setDrawGridBackground(false)
-        //lineChart.axisLeft.setDrawLabels(false)
+        lineChart.axisLeft.setDrawLabels(false)
         lineChart.getXAxis().setEnabled(false)
         lineChart.axisRight.setDrawLabels(false)
         lineChart.getAxisLeft().setDrawGridLines(false);
@@ -210,23 +215,27 @@ class ContentAdapter(var items: ArrayList<Int>, var transactionList: List<Transa
         lineChart.getAxisLeft().setDrawAxisLine(false)
         lineChart.xAxis.setDrawLabels(false)
         lineChart.legend.isEnabled = false   // Hide the legend
+        lineChart.getAxisLeft().setTextColor(Color.rgb(254,211,44))
 
     }
 
     fun setBarChart(dataSetEntry: MutableList<BarEntry>, barChart: BarChart) {
 
         val dataSet = BarDataSet(dataSetEntry,"My Data")
+        dataSet.setColors(arrayListOf(Color.rgb(61, 255, 186),Color.rgb(224, 49, 49)))
         val barData = BarData(dataSet)
         barChart.data = barData
         barChart.data.setValueTextSize(15f)
+        barChart.data.setValueTextColor(Color.rgb(254,211,44))
         barChart.setDrawGridBackground(false)
         barChart.getXAxis().setEnabled(false)
         barChart.axisRight.setDrawLabels(false)
         barChart.getAxisLeft().setDrawGridLines(false);
         barChart.getXAxis().setDrawGridLines(false);
         barChart.getAxisLeft().setDrawAxisLine(false)
-        barChart.xAxis.setDrawLabels(true)
+        barChart.xAxis.setDrawLabels(false)
         barChart.legend.isEnabled = false   // Hide the legend
+        barChart.getAxisLeft().setTextColor(Color.rgb(254,211,44))
 
     }
     fun setEntryTotal(dataSetEntry: MutableList<Double>, balance: Int): MutableList<Entry> {
@@ -244,12 +253,14 @@ class ContentAdapter(var items: ArrayList<Int>, var transactionList: List<Transa
 
     fun setBarEntryPerTime(dataSetEntry: List<TransactionWeek>): MutableList<BarEntry> {
         val dataSet = mutableListOf<BarEntry>()
-        var yValue = 0f
+        var yValueIn = 0f
+        var yValueOut = 0f
         var xValue = 0f
         for (items: TransactionWeek in dataSetEntry) {
-            yValue = (items.totalIncome - items.totalOutcome).toFloat()
+            yValueIn = items.totalIncome.toFloat()
+            yValueOut = -items.totalOutcome.toFloat()
             xValue += 1f
-            dataSet.add(BarEntry(xValue, yValue))
+            dataSet.add(BarEntry(xValue, floatArrayOf(yValueIn,yValueOut)))
         }
         return dataSet
     }
