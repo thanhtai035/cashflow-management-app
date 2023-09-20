@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#101624"
+    android:layout_height="match_parent"
+    android:id="@+id/dashboardFragment"
+    android:gravity="bottom"
+    tools:context=".presentation.ui.DashboardFragment"
+    app:umanoDragView="@id/dragView"
+    app:umanoPanelHeight="0dp"
+    app:umanoShadowHeight="0dp"
+    app:umanoOverlay="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+<!--        Full screen for story-->
+        <androidx.viewpager2.widget.ViewPager2
+            android:visibility="gone"
+            android:id="@+id/story_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        </androidx.viewpager2.widget.ViewPager2>
+
+<!--        Main Screen-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:id="@+id/contentLayout"
+            android:elevation="10dp"
+            android:layout_height="match_parent"
+            >
+
+<!--            Chatbot layout-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chatbot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:alpha="0.6"
+                android:elevation="1000dp"
+                app:layout_constraintBottom_toTopOf="@+id/progressLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/navigateLayout">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation_view"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:elevation="50dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="lottie_robot.json"
+                    app:lottie_loop="true" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--            Top bar-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:id="@+id/top_layout"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#363644"
+                    />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="0dp"
+                    android:backgroundTint="#363644"
+                    app:cardCornerRadius="30dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    
+                        <com.daimajia.swipe.SwipeLayout
+                            android:layout_width="180dp"
+                            android:paddingStart="10dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/accountNavigate"
+                            >
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_marginTop="10dp"
+                                android:layout_height="match_parent">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                android:layout_marginEnd="60dp"
+                                android:backgroundTint="@android:color/transparent"
+                                app:cardElevation="20dp"
+                                app:cardCornerRadius="10dp"
+                                >
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/signOutBtn"
+                                    android:background="#F47174"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="10dp"
+                                    >
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto"
+                                        android:gravity="center"
+                                        android:textStyle="bold"
+                                        android:text="Sign Out"
+                                        android:textColor="@color/white"
+                                        app:layout_constraintTop_toTopOf="parent"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        android:textSize="18sp"
+                                        />
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+                            </androidx.cardview.widget.CardView>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:paddingVertical="5dp"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <com.airbnb.lottie.LottieAnimationView
+                                    android:layout_width="30dp"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="fitXY"
+                                    app:lottie_autoPlay="true"
+                                    app:lottie_fileName="lottie_arrow.json"
+                                    app:lottie_loop="true"/>
+
+                                <TextView
+                                    android:paddingTop="10dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center"
+                                    android:text="Hello, "
+                                    android:textColor="@color/white"
+                                    android:textSize="18sp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/userName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="2dp"
+                                    android:fontFamily="@font/roboto"
+                                    android:gravity="center"
+                                    android:text="user"
+                                    android:textColor="@color/white"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </com.daimajia.swipe.SwipeLayout>
+
+
+
+                        <ImageView
+                            android:id="@+id/notiNavigate"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/baseline_notifications_none_24"
+                            android:tint="@color/white"
+                            app:layout_constraintBottom_toBottomOf="@id/accountNavigate"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/accountNavigate" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:id="@+id/adLayout"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/accountNavigate"
+                            >
+                            <!--         Advertisement List RecyclerView-->
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:paddingStart="10dp"
+                                app:layout_constraintTop_toBottomOf="@id/accountNavigate"
+                                android:id="@+id/adShimmer"
+                                >
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    >
+
+                                    <include layout="@layout/ad_placeholder" />
+
+                                    <include layout="@layout/ad_placeholder" />
+
+                                    <include layout="@layout/ad_placeholder" />
+
+                                    <include layout="@layout/ad_placeholder" />
+                                </LinearLayout>
+
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/adList"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:clipToPadding="false"
+                                android:paddingStart="24dp"
+                                android:paddingEnd="24dp"
+                                android:visibility="gone"
+                                 />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                        <!--  Cards View-->
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/cardShimmer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="30dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/adLayout">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp">
+
+                                <View
+                                    android:layout_width="300dp"
+                                    android:layout_height="200dp"
+                                    android:layout_marginStart="30dp"
+                                    android:id="@+id/shimmerCard1"
+                                    android:background="@drawable/card_placeholder_background"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent" />
+
+                                <View
+                                    android:layout_width="300dp"
+                                    android:layout_height="200dp"
+                                    android:layout_marginStart="30dp"
+                                    android:id="@+id/shimmerCard2"
+                                    android:background="@drawable/card_placeholder_background"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent" />
+                            </LinearLayout>
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="10dp"
+                            app:layout_constraintTop_toBottomOf="@id/adLayout">
+
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/cardPager"
+                                android:visibility="gone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-5dp"
+                                android:paddingVertical="0dp"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.rd.PageIndicatorView
+                                android:id="@+id/pageIndicatorView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:visibility="gone"
+                                android:paddingTop="5dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/cardPager"
+                                app:piv_animationType="scale"
+                                app:piv_dynamicCount="true"
+                                app:piv_radius="4dp"
+                                app:piv_interactiveAnimation="true"
+                                app:piv_selectedColor="@color/selectedDotColor"
+                                app:piv_unselectedColor="@color/unselectedDotColor" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/navigateBar"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/cardPager" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/navigateLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/top_layout">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/transactionNavigate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#363644"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:cardCornerRadius="15dp"
+                    >
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#363644"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textViewx"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Transaction History"
+                                android:textColor="@color/white"
+                                android:textSize="16dp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:text="Review your last spendings"
+                                android:textColor="#808088"
+                                android:textSize="12dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/textViewx" />
+                        </LinearLayout>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_marginRight="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:cardCornerRadius="15dp"
+                            app:cardElevation="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/button_bg"
+                                android:padding="12dp">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/baseline_history_24" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.cardview.widget.CardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/budgetNavigate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#363644"
+                    android:layout_marginHorizontal="20dp"
+                    app:cardCornerRadius="15dp"
+                    >
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#363644"
+                        android:paddingHorizontal="20dp"
+                        android:paddingVertical="10dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Create a new goal"
+                                android:textColor="@color/white"
+                                android:textSize="16dp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="Reach more goals"
+                                android:textColor="#808088"
+                                android:textSize="12dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/textViewx" />
+                        </LinearLayout>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_marginRight="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:cardCornerRadius="15dp"
+                            app:cardElevation="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/button_bg"
+                                android:padding="12dp">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/baseline_format_list_bulleted_24" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </androidx.cardview.widget.CardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+            <!--             Circular Graph-->
+
+            <TextView
+                android:id="@+id/analysisText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Monthly Analysis"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:paddingStart="20dp"
+                android:fontFamily="@font/roboto"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/navigateLayout"
+                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/progressLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@id/guideline_start"
+                app:layout_constraintTop_toBottomOf="@id/analysisText">
+
+                <com.ramijemli.percentagechartview.PercentageChartView
+                    android:id="@+id/percentageView"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:elevation="100dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:pcv_mode="ring"
+                    app:pcv_orientation="clockwise"
+                    app:pcv_animDuration="1000"
+                    app:pcv_animInterpolator="accelerate"
+                    app:pcv_drawBackgroundBar="true"
+                    android:layout_marginStart="40dp"
+                    app:pcv_backgroundBarColor="#363644"
+                    app:pcv_progressBarThickness="8dp"
+                    app:pcv_drawBackground="true"
+                    app:pcv_backgroundColor="#5a5a65"
+                    app:pcv_backgroundBarThickness="30dp"
+                    app:pcv_progress="0"
+                    app:pcv_progressColor="#fff4d6"
+                    app:pcv_startAngle="90"
+                    app:pcv_textSize="0sp"
+                    app:pcv_textStyle="bold"
+                    android:visibility="invisible"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:elevation="120dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/percentageView"
+                    app:layout_constraintStart_toStartOf="@+id/percentageView"
+                    app:layout_constraintTop_toTopOf="@+id/percentageView">
+
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/totalScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textAlignment="center"
+                            android:textColor="#fff4d6"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/progressShimmer"
+                    app:layout_constraintBottom_toBottomOf="@+id/percentageView"
+                    app:layout_constraintTop_toTopOf="@+id/percentageView"
+                    tools:layout_editor_absoluteX="20dp"
+                    >
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:backgroundTint="#363644"
+                        app:cardCornerRadius="15dp"
+                        app:cardElevation="2dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/percentageView"
+                        app:layout_constraintTop_toTopOf="@+id/percentageView"
+                        tools:layout_editor_absoluteX="20dp">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingVertical="10dp"
+                            android:paddingEnd="20dp"
+                            >
+
+                            <LinearLayout
+                                android:id="@+id/modalBtn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="5dp"
+                                    android:id="@+id/analysisTitle"
+                                    android:text=""
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent" />
+
+                                <LinearLayout
+                                    android:visibility="invisible"
+                                    android:id="@+id/modalLayout"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/anaylysisText"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:text="Click to see your analysis"
+                                        android:textColor="#808088"
+                                        android:textSize="14sp"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent" />
+
+                                    <ImageView
+                                        android:id="@+id/imageView"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="17dp"
+                                        android:paddingTop="3dp"
+                                        android:src="@drawable/baseline_arrow_forward_ios_24"
+                                        android:tint="#808088"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintStart_toEndOf="@id/anaylysisText"
+                                        app:layout_constraintTop_toTopOf="parent" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--    Drag panel-->
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dragView"
+            android:elevation="10000dp"
+            android:orientation="vertical"
+            >
+            <androidx.viewpager2.widget.ViewPager2
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/contentPager"
+                >
+            </androidx.viewpager2.widget.ViewPager2>
+        </LinearLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

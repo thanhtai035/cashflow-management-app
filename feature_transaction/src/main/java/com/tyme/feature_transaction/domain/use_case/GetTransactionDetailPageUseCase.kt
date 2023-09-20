@@ -13,10 +13,10 @@ class GetTransactionDetailPageUseCase (
 ){
     operator fun invoke(userID: String, pageNum: Int, month: Int, year: Int,
                                 sortType: String?, sortDir : String?,
-                                category: String?, keyword: String?): Flow<Result<TransactionDetailPage>> = flow {
+                                category: String?, keyword: String?, income: Boolean?): Flow<Result<TransactionDetailPage>> = flow {
         try {
             emit(Result.Loading<TransactionDetailPage>())
-            val result = repository.getTransactionDetailPage(userID, pageNum, month, year, sortType, sortDir, category, keyword)
+            val result = repository.getTransactionDetailPage(userID, pageNum, month, year, sortType, sortDir, category, keyword, income)
             emit(Result.Success<TransactionDetailPage>(result))
         } catch(e: HttpException) {
             emit(Result.Error<TransactionDetailPage>(e.localizedMessage ?: "An unexpected error occured"))

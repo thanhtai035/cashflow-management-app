@@ -1,7 +1,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <ripple android:color="?attr/colorControlHighlight">
-            <item android:drawable="@drawable/button_background" />
+            <item android:drawable="@drawable/card_background1" />
         </ripple>
     </item>
     <item>

@@ -4,6 +4,7 @@ import android.util.Log
 import com.tyme.feature_dashboard.data.dto.toEntity
 import com.tyme.feature_dashboard.data.service.TransactionService
 import com.tyme.feature_dashboard.data.service.UserService
+import com.tyme.feature_dashboard.domain.model.AnalysisResponse
 import com.tyme.feature_dashboard.domain.model.TransactionWeek
 import com.tyme.feature_dashboard.domain.model.User
 import com.tyme.feature_dashboard.domain.repository.TransactionRepository
@@ -15,6 +16,11 @@ class UserRepositoryImpl (
     override suspend fun getUser(
         userID: String,
     ): User {
-        return apiService.getUser(userID).toEntity()
+        val user = apiService.getUser(userID).toEntity()
+        return user
+    }
+
+    override suspend fun getAnalysis(userID: String): AnalysisResponse {
+        return apiService.getAnalysis(userID).toEntity()
     }
 }

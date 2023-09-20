@@ -23,7 +23,9 @@ import com.tyme.cashflow_manament_app.R
 import com.tyme.cashflow_manament_app.databinding.ActivityNavigationBinding
 import com.tyme.feature_dashboard.presentation.ui.DashboardFragment
 import com.tyme.base.ext.FragmentListener
-import com.tyme.feature_account.presentation.ui.AccountFragment
+import com.tyme.cashflow_manament_app.app.presentation.authentication.AuthenticationActivity
+import com.tyme.feature_account.presentation.ui.BudgetGoalActivity
+import com.tyme.feature_notification.presentation.ui.NotificationActivity
 import com.tyme.feature_transaction.presentation.ui.TransactionHistoryActivity
 
 
@@ -44,14 +46,14 @@ class NavigationActivity : BaseActivity(R.layout.activity_navigation), FragmentL
         binding.navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.account -> {
-                    replaceFragment(AccountFragment())
+//                    replaceFragment(AccountFragment())
 //                startActivity(Intent(this, AccountFragment::class.java))
                 }
                 R.id.history -> {
                     startActivity(Intent(this, TransactionHistoryActivity::class.java))
                 }
                 R.id.budget -> {
-                    startActivity(Intent(this, TransactionHistoryActivity::class.java))
+//                    startActivity(Intent(this, TransactionHistoryActivity:  :class.java))
                 }
             }
             drawerLayout.closeDrawers()
@@ -63,10 +65,26 @@ class NavigationActivity : BaseActivity(R.layout.activity_navigation), FragmentL
     override fun onNavigate(fragment: FragmentEnum) {
         when (fragment) {
             FragmentEnum.Dashboard -> replaceFragment(DashboardFragment())
-            FragmentEnum.Account -> replaceFragment(AccountFragment())
+            FragmentEnum.Account -> {
+                val intent = Intent(this, TransactionHistoryActivity::class.java)
+                startActivity(intent)
+            }
             FragmentEnum.Transaction -> {
                 val intent = Intent(this, TransactionHistoryActivity::class.java)
                 startActivity(intent)
+            }
+            FragmentEnum.Budget -> {
+                val intent = Intent(this, BudgetGoalActivity::class.java)
+                startActivity(intent)
+            }
+            FragmentEnum.Notification -> {
+                val intent = Intent(this, NotificationActivity::class.java)
+                startActivity(intent)
+            }
+            FragmentEnum.SignOut -> {
+                val intent = Intent(this, AuthenticationActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
     }

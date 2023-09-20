@@ -1,5 +1,6 @@
 package com.tyme.feature_dashboard.domain.model
 
+@kotlinx.serialization.Serializable
 data class Category(
     val entertainment: Int,
     val entertainmentAmount: Float,

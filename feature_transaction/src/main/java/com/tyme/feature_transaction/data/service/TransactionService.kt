@@ -15,7 +15,7 @@ interface TransactionService {
     suspend fun getTransactionDetailPage(@Path("userID") userID: String,
                                          @Query("pageNum") pageNum: Int, @Query("month") month: Int, @Query("year") year: Int,
                                          @Query("sortType") sortType: String?, @Query("sortDir") sortDir : String?,
-                                         @Query("category") category: String?, @Query("keyword") keyword: String?) : TransactionDetailPageDto
+                                         @Query("category") category: String?, @Query("keyword") keyword: String?, @Query("income") income: Boolean?) : TransactionDetailPageDto
 
 
 }

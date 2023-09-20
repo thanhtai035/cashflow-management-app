@@ -50,5 +50,5 @@ kotlin {
 }
 
 dependencies {
-    implementation(projects.base)
+    api(projects.featureChatbot)
 }

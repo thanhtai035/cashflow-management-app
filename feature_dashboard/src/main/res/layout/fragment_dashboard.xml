@@ -7,7 +7,7 @@
     android:id="@+id/dashboardFragment"
     android:background="#FFFFFF"
     android:gravity="bottom"
-     tools:context=".presentation.ui.DashboardFragment"
+    tools:context=".presentation.ui.DashboardFragment"
     app:umanoDragView="@id/dragView"
     app:umanoPanelHeight="28dp"
     app:umanoShadowHeight="0dp"
@@ -19,14 +19,40 @@
             android:layout_height="match_parent">
 
          <!--        Top Bar-->
+         <!-- Vertical Guideline at 10% for padding start -->
+         <androidx.constraintlayout.widget.Guideline
+             android:id="@+id/guideline_top2"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             app:layout_constraintGuide_percent="0.15" />
 
+         <!-- Vertical Guideline at 10% for padding start -->
+         <androidx.constraintlayout.widget.Guideline
+             android:id="@+id/guideline_start"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             app:layout_constraintGuide_percent="0.02" />
+
+         <!-- Horizontal Guideline at 10% for margin top -->
+         <androidx.constraintlayout.widget.Guideline
+             android:id="@+id/guideline_top"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:paddingVertical="4dp"
+             android:layout_marginBottom="50dp"
+             app:layout_constraintGuide_percent="0.01" />
          <!--         Full screen Story View Pager-->
          <androidx.constraintlayout.widget.ConstraintLayout
              android:id="@+id/top_bar"
-             android:layout_width="match_parent"
-             android:layout_height="50dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="50dp"
              android:background="@android:color/transparent"
-             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintTop_toTopOf="@id/guideline_top"
+             app:layout_constraintStart_toStartOf="@id/guideline_start"
              tools:layout_editor_absoluteX="0dp">
 
              <LinearLayout
@@ -34,6 +60,7 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:orientation="horizontal"
+                 android:paddingTop="3dp"
                  android:paddingStart="15dp"
                  app:layout_constraintBottom_toBottomOf="parent"
                  app:layout_constraintStart_toStartOf="parent"
@@ -41,43 +68,29 @@
 
                  <ImageView
                      android:id="@+id/hamburgerIcon"
-                     android:layout_width="wrap_content"
+                     android:layout_width="50dp"
                      android:layout_height="wrap_content"
+                     android:layout_gravity="center_vertical"
+                     android:onClick="onHamburgerIconClick"
                      android:src="@drawable/baseline_format_list_bulleted_24"
-                     android:layout_gravity="start"
-                     android:layout_marginEnd="10dp"
-                     android:onClick="onHamburgerIconClick" />
+                     app:layout_constraintStart_toStartOf="parent" />
 
                  <TextView
                      android:id="@+id/userName"
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:text="Hello, User"
+                     android:layout_marginStart="5dp"
                      android:textColor="@color/black"
-                     android:textSize="18sp" />
+                     android:textSize="18sp"
+                     app:layout_constraintStart_toEndOf="@+id/hamburgerIcon" />
 
-                 <ImageView
-                     android:layout_width="wrap_content"
-                     android:layout_height="20dp"
-                     android:paddingStart="2dp"
-                     android:paddingTop="5dp"
-                     android:src="@drawable/baseline_arrow_forward_ios_24"
-                     app:tint="@color/black"></ImageView>
              </LinearLayout>
-
-             <ImageView
-                 android:layout_width="wrap_content"
-                 android:layout_height="match_parent"
-                 android:paddingVertical="10dp"
-                 android:paddingEnd="20dp"
-                 android:scaleType="fitXY"
-                 android:src="@drawable/baseline_person_24"
-                 android:tint="@color/white"
-                 app:layout_constraintEnd_toEndOf="parent" />
 
          </androidx.constraintlayout.widget.ConstraintLayout>
 
          <androidx.viewpager2.widget.ViewPager2
+                android:paddingTop="20dp"
                 android:id="@+id/story_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -86,6 +99,7 @@
 
 <!--         Content layout-->
          <LinearLayout
+
              android:id="@+id/contentLayout"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
@@ -159,10 +173,10 @@
 
              <androidx.viewpager2.widget.ViewPager2
                  android:id="@+id/cardPager"
+                 android:layout_marginTop="25dp"
                  android:layout_width="match_parent"
-                 android:layout_height="320dp"
-                 android:layout_marginTop="20dp"
-                 android:paddingHorizontal="110dp"
+                 android:layout_height="0dp"
+                 android:paddingHorizontal="220dp"
                  app:layout_constraintBottom_toBottomOf="parent"
                  app:layout_constraintTop_toBottomOf="@+id/adList"
                  app:layout_constraintVertical_bias="0.0"
@@ -182,15 +196,15 @@
                  app:piv_selectedColor="@color/selectedDotColor"
                  app:piv_unselectedColor="@color/unselectedDotColor"
                  android:visibility="gone"/>
+
              <!--             Circular Graph-->
-
-
              <LinearLayout
+                 android:visibility="gone"
                  android:id="@+id/progressLayout"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"
+                 android:layout_gravity="bottom"
                  android:orientation="horizontal"
-                 android:visibility="gone"
                  android:layout_marginTop="10dp">
                  <com.ramijemli.percentagechartview.PercentageChartView
                      android:id="@+id/percentageView"
@@ -232,7 +246,7 @@
 
                      <LinearLayout
                          android:id="@+id/linearLayout"
-                         android:layout_width="match_parent"
+                         android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:orientation="horizontal"
                          app:layout_constraintTop_toBottomOf="@+id/textView">
@@ -260,28 +274,53 @@
                      </LinearLayout>
 
                      <LinearLayout
+                         android:id="@+id/modalBtn"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:orientation="horizontal"
-                         app:layout_constraintEnd_toEndOf="parent"
-                         android:layout_marginTop="20dp"
-                         android:layout_marginEnd="20dp"
-                         android:id="@+id/modalBtn"
+                         app:layout_constraintStart_toStartOf="@+id/linearLayout"
                          app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-                         <TextView
+
+                         <androidx.constraintlayout.widget.ConstraintLayout
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
-                             android:text="Go to Analysis"
-                             android:textColor="@color/material_blue"
-                             android:textSize="18sp" />
+                             android:layout_marginTop="10dp"
+                             android:layout_marginStart="20dp"
+                             android:orientation="horizontal">
 
-                         <ImageView
-                             android:layout_width="wrap_content"
-                             android:paddingTop="3dp"
-                             android:layout_height="17dp"
-                             android:src="@drawable/baseline_arrow_forward_ios_24"
-                             android:tint="@color/material_blue"/>
+                             <TextView
+                                 android:id="@+id/anaylysisText"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="Go to Analysis"
+                                 android:textColor="@color/material_blue"
+                                 android:textSize="18sp"
+                                 app:layout_constraintBottom_toBottomOf="parent"
+                                 app:layout_constraintStart_toStartOf="parent" />
+
+                             <ImageView
+                                 android:id="@+id/imageView"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="17dp"
+                                 android:paddingTop="3dp"
+                                 android:src="@drawable/baseline_arrow_forward_ios_24"
+                                 android:tint="@color/material_blue"
+                                 app:layout_constraintBottom_toBottomOf="parent"
+                                 app:layout_constraintStart_toEndOf="@id/anaylysisText"
+                                 app:layout_constraintTop_toTopOf="parent" />
+
+                         </androidx.constraintlayout.widget.ConstraintLayout>
                      </LinearLayout>
+
+                     <de.hdodenhof.circleimageview.CircleImageView
+                         android:id="@+id/chatbot"
+                         android:layout_width="70dp"
+                         android:layout_height="70dp"
+                         android:src="@drawable/chatbot"
+                         app:layout_constraintBottom_toBottomOf="parent"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         android:layout_marginEnd="10dp"/>
+
                  </androidx.constraintlayout.widget.ConstraintLayout>
              </LinearLayout>
 
@@ -291,9 +330,11 @@
                  android:layout_height="wrap_content"
                  android:layout_marginTop="15dp"
                  >
-                 <include layout="@layout/progress_placeholder"/>
+
+                 <include layout="@layout/progress_placeholder" />
              </com.facebook.shimmer.ShimmerFrameLayout>
          </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 <!--    Drag panel-->

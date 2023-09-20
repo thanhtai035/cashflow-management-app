@@ -1,25 +1,33 @@
 package com.tyme.cashflow_manament_app.app.presentation.authentication
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.os.Handler
+import android.view.WindowManager
 import com.tyme.base.presentation.activity.BaseActivity
 import com.tyme.base_feature.common.Result
 import com.tyme.cashflow_manament_app.R
 import com.tyme.cashflow_manament_app.app.presentation.navigation.ui.NavigationActivity
 import com.tyme.cashflow_manament_app.app.presentation.authentication.util.AuthenticationDialogEnum
+import com.tyme.cashflow_manament_app.databinding.ActivityAuthenticationMigrationBinding
 import com.tyme.cashflow_manament_app.databinding.ActivityAuthenticationViewBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AuthenticationActivity : BaseActivity(R.layout.activity_authentication_view) {
     private val viewModel: AuthenticationViewModel by viewModel()
-    private lateinit var binding: ActivityAuthenticationViewBinding
+    private lateinit var binding: ActivityAuthenticationMigrationBinding
     private lateinit var modalDialogFragment: AuthenticationDialogFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAuthenticationViewBinding.inflate(layoutInflater) //initializing the binding class
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        binding = ActivityAuthenticationMigrationBinding.inflate(layoutInflater) //initializing the binding class
         setContentView(binding.root)
+        val screenHeight = Resources.getSystem().displayMetrics.heightPixels
+        val paramCard = binding.imageView2.layoutParams
+        paramCard.width = (screenHeight * 0.35).toInt()
+        paramCard.height = (screenHeight * 0.35).toInt()
 
         // Set Log in button listener
         binding.logInBtn.setOnClickListener {

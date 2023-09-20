@@ -13,6 +13,9 @@ data class TransactionDetailPageDto(
     val last: Boolean,
     @SerialName("size")
     val size: Int,
+    @SerialName("totalPages")
+    val totalPage: Int
+
 )
 
 fun TransactionDetailPageDto.toEntity(): TransactionDetailPage {
@@ -20,6 +23,7 @@ fun TransactionDetailPageDto.toEntity(): TransactionDetailPage {
         transactionDetailList = this.transactionDetailList.map {it.toEntity()},
         first = this.first,
         last = this.last,
-        size = this.size
+        size = this.size,
+        totalPage = this.totalPage
     )
 }

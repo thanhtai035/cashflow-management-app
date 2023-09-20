@@ -12,6 +12,7 @@
         android:id="@+id/chatbot_loading"
         style="@style/SpinKitView.ThreeBounce"
         android:paddingHorizontal="20dp"
+
         android:paddingVertical="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,11 +23,13 @@
 
     <TextView
         android:id="@+id/messageTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
         android:layout_height="wrap_content"
         android:background="@drawable/left_message"
         android:padding="10dp"
         android:text=""
+        android:textSize="14sp"
         android:textColor="@android:color/black"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"

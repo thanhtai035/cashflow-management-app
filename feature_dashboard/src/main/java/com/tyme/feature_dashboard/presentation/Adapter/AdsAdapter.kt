@@ -1,6 +1,7 @@
 package com.tyme.feature_dashboard.presentation.Adapter
 
 import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.tyme.feature_dashboard.domain.model.Advertisement
 import com.tyme.feature_dashboard.R
+import com.tyme.feature_dashboard.presentation.util.ViewUtils
 
 class AdsAdapter(var items: ArrayList<Advertisement>) :
     RecyclerView.Adapter<AdsAdapter.Viewholder>() {
@@ -33,6 +35,13 @@ class AdsAdapter(var items: ArrayList<Advertisement>) :
             .load(drawableResourceId)
             .transform(GranularRoundedCorners(30f, 30f, 0f, 0f))
             .into(holder.pic)
+
+        val screenHeight = Resources.getSystem().displayMetrics.heightPixels
+        val desiredHeight = (screenHeight * 0.09).toInt()
+
+        val params = holder.itemView.layoutParams
+        params.height = desiredHeight
+        params.width = params.height
 
     }
 

@@ -89,6 +89,17 @@ dependencyResolutionManagement {
             version("mpchart", "v3.1.0")
             version("dotindicator", "1.0.3")
             version("spinkit", "1.4.0")
+            version("bottomsheet", "2.0.0")
+            version("dragpanel", "1.9")
+            version("donutview", "2.2.3")
+            version("barchart", "2.0.6")
+            version("berrychart", "1.1.0")
+            version("prettytime", "5.0.1.Final")
+            version("scrollview", "1.6.0")
+            version("swipelayout", "1.2.0")
+            version("spinner", "1.4.4")
+            version("swiperefresh", "1.2.3")
+            version("aachart", "7.2.1")
 
             // Gradle Plugins https://plugins.gradle.org/
             plugin("android-application", "com.android.application").versionRef("androidGradlePlugin")
@@ -168,6 +179,17 @@ dependencyResolutionManagement {
             library("mpchart", "com.github.PhilJay", "MPAndroidChart").versionRef("mpchart")
             library("dotindicator", "com.romandanylyk", "pageindicatorview").versionRef("dotindicator")
             library("spinkit", "com.github.ybq", "Android-SpinKit").versionRef("spinkit")
+            library("bottomsheet", "com.github.andrefrsousa", "SuperBottomSheet").versionRef("bottomsheet")
+            library("dragpanel", "com.github.pedrovgs", "draggablepanel").versionRef("dragpanel")
+            library("donutview", "app.futured.donut", "donut").versionRef("donutview")
+            library("barchart", "com.github.hadiidbouk", "ChartProgressBar-Android").versionRef("barchart")
+            library("berrychart", "com.github.STRAIBERRY-AI-INC", "Straiberry-charts").versionRef("berrychart")
+            library("prettytime", "org.ocpsoft.prettytime", "prettytime").versionRef("prettytime")
+            library("scrollview", "com.github.ksoichiro", "android-observablescrollview").versionRef("scrollview")
+            library("swipelayout", "com.daimajia.swipelayout", "library").versionRef("swipelayout")
+            library("spinner", "com.github.arcadefire", "nice-spinner").versionRef("spinner")
+            library("swiperefresh", "com.github.orangegangsters", "swipy").versionRef("swiperefresh")
+            library("aachart", "com.github.AAChartModel", "AAChartCore-Kotlin").versionRef("aachart")
 
             bundle("retrofit", listOf("retrofitCore", "kotlinxSerializationConverter", "serializationJson", "okhttp", "okhttpInterceptor"))
             bundle("koin", listOf("koin", "koinNavigation"))
@@ -190,3 +212,4 @@ dependencyResolutionManagement {
         }
     }
 }
+include(":feature_notification")

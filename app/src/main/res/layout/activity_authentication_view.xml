@@ -91,7 +91,7 @@
                 android:paddingVertical="15dp"
                 android:text="LOG IN"
                 android:layout_gravity="center"
-                android:background="@drawable/button_background"
+                android:background="@drawable/card_background1"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="26sp"

@@ -7,6 +7,7 @@ data class TransactionDetailPage(
     val first: Boolean,
     val last: Boolean,
     val size: Int,
+    val totalPage: Int
 ) {
     public fun getTransactionList(): List<TransactionDetail> {return transactionDetailList}
 }

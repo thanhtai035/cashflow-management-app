@@ -81,6 +81,5 @@ dependencies {
     implementation(projects.featureAccount)
     implementation(projects.featureDashboard)
     implementation(projects.featureTransaction)
-    implementation(projects.featureChatbot)
-
+    implementation(projects.featureNotification)
 }

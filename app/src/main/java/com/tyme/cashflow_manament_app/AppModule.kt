@@ -1,6 +1,7 @@
 package com.tyme.cashflow_manament_app
 
 
+import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.tyme.base.Common.Constant
 import com.tyme.cashflow_manament_app.app.data.dataModule
@@ -26,7 +27,7 @@ val appModule = module {
 
     single {
         HttpLoggingInterceptor { message ->
-            Timber.d("Http: $message")
+            Log.d("tai","Http: $message")
         }.apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
@@ -35,8 +36,8 @@ val appModule = module {
     single {
         OkHttpClient.Builder()
             .addInterceptor(get<HttpLoggingInterceptor>())
-//            .addInterceptor(get<AuthenticationInterceptor>())
-            .build()
+            .connectTimeout(100, TimeUnit.SECONDS)
+            .readTimeout(100,TimeUnit.SECONDS).build()
     }
 
     single {
@@ -50,7 +51,6 @@ val appModule = module {
         Retrofit.Builder()
             .baseUrl(Constant.BASE_URL)
             .client(get())
-            .client(OkHttpClient.Builder().connectTimeout(40, TimeUnit.SECONDS).build()) // Adjust the timeout as needed
             .addConverterFactory(json.asConverterFactory(contentType))
             .build()
     }

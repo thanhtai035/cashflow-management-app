@@ -8,6 +8,7 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +16,8 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.highlight.Highlight
-import com.tyme.base.presentation.activity.BaseActivity
 import com.tyme.base.Common.Constant
+import com.tyme.base.presentation.activity.BaseActivity
 import com.tyme.base_feature.common.Result
 import com.tyme.feature_transaction.R
 import com.tyme.feature_transaction.databinding.ActivityTransactionHistoryBinding
@@ -27,14 +28,17 @@ import com.tyme.feature_transaction.presentation.viewmodel.TransactionSummary
 import com.tyme.feature_transaction.presentation.viewmodel.TransactionViewModel
 import org.koin.android.ext.android.inject
 
+
 class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_history)   {
     private lateinit var binding: ActivityTransactionHistoryBinding
     private var entries: ArrayList<PieEntry> = ArrayList<PieEntry>()
+    private var overallEntries: ArrayList<PieEntry> = ArrayList<PieEntry>()
     private lateinit var dataSet: PieDataSet
     private lateinit var transactionSummary: TransactionSummary
-
+    private var firstPage = true;
+    private var itemList : List<TransactionDetail> = ArrayList<TransactionDetail>()
     private val viewModel: TransactionViewModel by inject()
-
+    private lateinit var transactionListAdapter: TransactionListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTransactionHistoryBinding.inflate(layoutInflater)
@@ -44,21 +48,50 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
         binding.transactionBackBtn.setOnClickListener{
             finish()
         }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.setPage()
+        }
     }
 
     override fun onStart() {
         viewModel.initialize()
+
+        binding.radioGroup.setOnCheckedChangeListener {group, checkID ->
+            entries.clear()
+            binding.pieChart.clear()
+            binding.pieChart.invalidate()
+            when (checkID) {
+                R.id.radioButton1 -> {
+                    firstPage = true
+                    viewModel.changePage(false)
+                    loadPieChartData()
+                    setupPieChart()
+                }
+                R.id.radioButton2 -> {
+                    firstPage = false
+                    viewModel.changePage(true)
+                    loadPieChartData()
+                    setupPieChart()
+                }
+            }
+        }
+
         viewModel.transactionPage.observe(this) {
                 response ->
             when (response) {
                 is Result.Success -> {
                     initTransactionAdapter(response.data?.transactionDetailList?:ArrayList<TransactionDetail>())
+                    binding.swipeRefreshLayout.isRefreshing = false
                 }
                 is Result.Loading -> {
-                    binding.transactionList.visibility = View.GONE
-                    binding.listShimmer.startShimmer()
-                    binding.listShimmer.visibility = View.VISIBLE
+                    if(viewModel.getCurrentPage() == 1) {
+                        binding.transactionList.visibility = View.GONE
+                        binding.listShimmer.startShimmer()
+                        binding.listShimmer.visibility = View.VISIBLE
+                    }
                 } else -> {
+                binding.swipeRefreshLayout.isRefreshing = false
             }
             }
         }
@@ -71,8 +104,10 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
                 response ->
             when (response) {
                 is Result.Success -> {
-                    loadPieChartData(response.data?:ArrayList<TransactionWeek>())
+                    transactionSummary = viewModel.getSummary(response.data?:ArrayList<TransactionWeek>())
+                    loadPieChartData()
                     setupPieChart()
+                    binding.swipeRefreshLayout.isRefreshing = false
                 }
                 is Result.Loading -> {
 
@@ -80,6 +115,7 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
             }
             }
         }
+
         super.onStart()
     }
 
@@ -123,7 +159,15 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
                         centerText = createCenterTextFormatter(getCurrentSliceAt90Degrees()?.label?:"", getCurrentSliceAt90Degrees()?.value.toString() + "$")
                     }
                     MotionEvent.ACTION_UP -> {
-                        viewModel.setCategory(getCurrentSliceAt90Degrees()?.label)
+                        if (!firstPage) {
+                            viewModel.setCategory(getCurrentSliceAt90Degrees()?.label)
+                        } else {
+                            if (getCurrentSliceAt90Degrees()?.label == "Income") {
+                                viewModel.setIncome(true)
+                            } else {
+                                viewModel.setIncome(false)
+                            }
+                        }
                     }
                 }
                 false
@@ -132,14 +176,27 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
     }
 
     private fun initTransactionAdapter(items: List<TransactionDetail>) {
-        Handler().postDelayed({
-            binding.transactionList.apply {
-                adapter = TransactionListAdapter(items)
-                layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
-                isNestedScrollingEnabled = false
+        binding.swipeRefreshLayout.isRefreshing = false
+        if (viewModel.getCurrentPage() > 1) {
+            val mergedList = mutableListOf<TransactionDetail>()
+            mergedList.addAll(itemList)
+            mergedList.addAll(items)
+            itemList = mergedList
+            transactionListAdapter.items = itemList
+            transactionListAdapter.notifyDataSetChanged()
 
-            }
-        }, 2000)
+        } else {
+            itemList = items
+            transactionListAdapter = TransactionListAdapter(itemList)
+            Handler().postDelayed({
+                binding.transactionList.apply {
+                    adapter = transactionListAdapter
+                    layoutManager =
+                        LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+                    isNestedScrollingEnabled = false
+                }
+            }, 2000)
+        }
 
         Handler().postDelayed({
             binding.listShimmer.stopShimmer()
@@ -148,28 +205,43 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
         }, 4000)
     }
 
-    private fun loadPieChartData(items: List<TransactionWeek>) {
-        transactionSummary = viewModel.getSummary(items)
-        var colors : ArrayList<Int> = ArrayList()
-        for (item in 0 until transactionSummary.categoryDistribution.size) {
-            entries.add(PieEntry(transactionSummary.categoryDistribution[item]*-1, transactionSummary.categoryTitleList[item].toString()))
-            colors.add(transactionSummary.color[item])
+    private fun loadPieChartData() {
+
+
+        if (!firstPage) {
+            for (item in 0 until transactionSummary.categoryDistribution.size) {
+                entries.add(
+                    PieEntry(
+                        transactionSummary.categoryDistribution[item] * -1,
+                        transactionSummary.categoryTitleList[item].toString()
+                    )
+                )
+            }
+            val colorList = listOf(
+                Color.parseColor("#2c5dca"), // Custom color for Entry 1
+                Color.parseColor("#03A9F4"), // Custom color for Entry 2
+                Color.parseColor("#4CAF50"), // Custom color for Entry 3
+                Color.parseColor("#9C27B0"), // Custom color for Entry 4
+                Color.parseColor("#FF5722"), // Custom color for Entry 5
+                Color.parseColor("#E91E63"), // Custom color for Entry 6
+                Color.parseColor("#607D8B") // Custom color for Entry 7
+            )
+            dataSet = PieDataSet(entries, "")
+            dataSet.colors = colorList
+        } else {
+            entries.add(PieEntry(transactionSummary.totalIncome.toFloat(), "Income"))
+            entries.add(PieEntry(transactionSummary.totalOutcome.toFloat(), "Outcome"))
+            val colorList = listOf(
+                Color.parseColor("#2c5dca"),
+                Color.parseColor("#9C27B0")
+            )
+            dataSet = PieDataSet(entries, "")
+            dataSet.colors = colorList
         }
-        val colorList = listOf(
-            Color.parseColor("#FFC107"), // Custom color for Entry 1
-            Color.parseColor("#03A9F4"), // Custom color for Entry 2
-            Color.parseColor("#4CAF50"), // Custom color for Entry 3
-            Color.parseColor("#9C27B0"), // Custom color for Entry 4
-            Color.parseColor("#FF5722"), // Custom color for Entry 5
-            Color.parseColor("#E91E63"), // Custom color for Entry 6
-            Color.parseColor("#607D8B") // Custom color for Entry 7
-        )
-        dataSet = PieDataSet(entries, "")
-        dataSet.colors = colorList
+
         val data = PieData(dataSet)
         data.setDrawValues(false)
         binding.pieChart.data = data
-
     }
 
     private fun getCurrentSliceAt90Degrees(): PieEntry? {

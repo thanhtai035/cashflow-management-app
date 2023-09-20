@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.tyme.feature_history"
+    namespace = "com.tyme.feature_account"
 
     compileSdk = 33
 
@@ -17,7 +17,6 @@ android {
         minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildFeatures {
@@ -51,4 +50,7 @@ kotlin {
 
 dependencies {
     api(projects.base)
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.4.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 }

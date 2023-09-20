@@ -17,7 +17,7 @@ class   TransactionRepositoryImpl (
 
     override suspend fun getTransactionDetailPage(userID: String, pageNum: Int, month: Int, year: Int,
                                                   sortType: String?, sortDir : String?,
-                                                  category: String?, keyword: String?): TransactionDetailPage {
-            return  apiService.getTransactionDetailPage(userID, pageNum, month, year, sortType, sortDir, category, keyword).toEntity()
+                                                  category: String?, keyword: String?, income: Boolean?): TransactionDetailPage {
+            return  apiService.getTransactionDetailPage(userID, pageNum, month, year, sortType, sortDir, category, keyword, income).toEntity()
     }
 }

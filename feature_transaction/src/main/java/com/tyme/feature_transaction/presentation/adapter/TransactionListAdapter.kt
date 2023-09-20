@@ -2,6 +2,7 @@ package com.tyme.feature_transaction.presentation.adapter
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,8 +37,10 @@ class TransactionListAdapter(var items: List<TransactionDetail>) :
         val str = transactionDetail.amount.toString() + " USD"
         holder.amount.text = str
         if(transactionDetail.amount < 0) {
-            holder.amount.setTextColor(Color.RED)
+            holder.amount.setTextColor(Color.parseColor("#F47174"))
         }
+
+
 
         val timeConvert = LocalDateTime.ofInstant(Instant.ofEpochSecond(transactionDetail.time), ZoneOffset.UTC )
         val formatter = DateTimeFormatter.ofPattern("hh:mm a - MMM dd, yyyy")

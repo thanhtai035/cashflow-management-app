@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background color for the view -->
+    <solid android:color="#363644"/>  <!-- Change this to your desired background color -->
+
+    <!-- Border properties -->
+    <stroke
+        android:width="300dp"
+        android:color="#363644"/>  <!-- Change this to your desired border color -->
+
+    <!-- Making the shape a circle -->
+    <size
+        android:width="400dp"
+        android:height="300dp"/>
+    <corners android:radius="50dp"/>
+</shape>

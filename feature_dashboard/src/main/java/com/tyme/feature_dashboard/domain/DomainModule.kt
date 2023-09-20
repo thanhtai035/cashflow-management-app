@@ -11,4 +11,7 @@ internal val domainModule = module {
 
     singleOf(::GetUserUseCase)
 
+    singleOf(::GetAnalysisUseCase)
+
+    singleOf(::GetTransactionDetailPageUseCase)
 }

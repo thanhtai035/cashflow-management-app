@@ -1,6 +1,7 @@
 package com.tyme.cashflow_manament_app.app
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.color.DynamicColors
 import com.tyme.base.baseModule
 import com.tyme.cashflow_manament_app.BuildConfig
@@ -8,6 +9,7 @@ import com.tyme.cashflow_manament_app.appModule
 import com.tyme.feature_account.featureAccountModule
 import com.tyme.feature_chatbot.featureChatBotModule
 import com.tyme.feature_dashboard.featureDashboardModule
+import com.tyme.feature_notification.featureNotificationModule
 import com.tyme.feature_transaction.featureTransactionModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -22,6 +24,9 @@ class MainApplication : Application() {
         initKoin()
         initTimber()
         initDynamicColorScheme()
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
     }
 
     private fun initDynamicColorScheme() {
@@ -40,6 +45,7 @@ class MainApplication : Application() {
             modules(featureDashboardModule)
             modules(featureChatBotModule)
             modules(authenticationModule)
+            modules(featureNotificationModule)
         }
     }
 

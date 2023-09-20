@@ -8,5 +8,5 @@ interface TransactionRepository {
 
     suspend fun getTransactionDetailPage(userID: String, pageNum: Int, month: Int, year: Int,
                                          sortType: String?, sortDir : String?,
-                                         category: String?, keyword: String?): TransactionDetailPage
+                                         category: String?, keyword: String?, income: Boolean?): TransactionDetailPage
 }

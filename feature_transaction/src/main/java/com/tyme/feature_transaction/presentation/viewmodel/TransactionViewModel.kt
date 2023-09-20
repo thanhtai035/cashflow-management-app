@@ -36,12 +36,11 @@ class TransactionViewModel (
 
 
     public fun getTransactionPage(userID: String) {
-        Log.d("tai", "categ")
         getTransactionDetailPageUseCase(userID, _state.value?.pageNum?:1,
                                           _state.value?.month?:LocalDateTime.now().monthValue,
                                             _state.value?.year?:LocalDateTime.now().year,
                                                  _state.value?.sortType, _state.value?.sortDir,
-                                                 _state.value?.category, _state.value?.keyword).onEach { result ->
+                                                 _state.value?.category, _state.value?.keyword, _state.value?.income).onEach { result ->
             transactionPage.postValue(result)
         }.launchIn(viewModelScope)
     }
@@ -100,10 +99,7 @@ class TransactionViewModel (
     }
 
     // Setter methods to update individual attributes of the state
-    fun setPageNum(pageNum: Int) {
-        val currentState = state.value ?: return
-        _state.postValue(currentState.copy(pageNum = pageNum))
-    }
+
 
 //    fun setMonth(month: Int) {
 //        val currentState = state.value ?: return
@@ -125,9 +121,34 @@ class TransactionViewModel (
 //        state.value = currentState.copy(sortType = sortType)
 //    }
 
+    public fun setPage() {
+        val currentState = state.value ?: return
+        if (transactionPage.value?.data?.totalPage!! > state.value!!.pageNum) {
+            _state.postValue(_state.value?.let { currentState.copy(pageNum = it.pageNum + 1) })
+        }
+    }
     public fun setCategory(category: String?) {
         val currentState = state.value ?: return
-        _state.postValue(currentState.copy(category = category))
+        _state.postValue(currentState.copy(category = category, pageNum = 1))
+    }
+
+    fun getCurrentPage() : Int {
+        return state.value?.pageNum ?: 1
+    }
+
+    public fun setIncome(income: Boolean) {
+        val currentState = state.value ?: return
+        _state.postValue(currentState.copy(income = income, category = null, pageNum = 1))
+    }
+
+    fun changePage(categoryPage: Boolean) {
+        val currentState = state.value ?: return
+        if(categoryPage) {
+            _state.postValue(currentState.copy(income = null))
+        }
+        else {
+            _state.postValue(currentState.copy(category = null))
+        }
     }
 
 //    fun setKeyword(keyword: String?) {

@@ -8,32 +8,9 @@
     <androidx.cardview.widget.CardView
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:paddingVertical="20dp"
-            android:paddingStart="20dp"
-            android:layout_height="wrap_content"
-            >
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:src="@drawable/baseline_arrow_back_ios_24"
-                android:scaleType="fitCenter"
-
-                app:tint="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Back"
-                android:textSize="15dp"
-                android:textColor="@color/black" />
-
-        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <ListView
@@ -65,11 +42,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingVertical="15dp"
-            android:textSize="15dp"
+            android:textSize="18dp"
             android:maxLength="50"
             android:hint="Type a message"
             android:background="@drawable/edit_text_bg"
-            android:drawableEnd="@drawable/baseline_send_24"
             android:paddingStart="15dp"
             android:paddingEnd="10dp"
             android:drawablePadding="10dp"

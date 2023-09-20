@@ -4,10 +4,14 @@
         <item>@font/akaya_telivigala</item>
         <item>@font/aladin</item>
         <item>@font/alex_brush</item>
+        <item>@font/allerta</item>
         <item>@font/andika</item>
         <item>@font/autour_one</item>
         <item>@font/capriola</item>
         <item>@font/lato_thin</item>
         <item>@font/open_sans_light</item>
+        <item>@font/roboto</item>
+        <item>@font/roboto_black</item>
+        <item>@font/roboto_bold</item>
     </array>
 </resources>
