@@ -40,6 +40,7 @@ class BudgetGoalActivity : AppCompatActivity(), BudgetAdapter.OnClickListener, B
             finish()
         }
 
+
         viewModel.transactionWeeks.observe(this) {
                 response ->
             when (response) {
@@ -100,13 +101,17 @@ class BudgetGoalActivity : AppCompatActivity(), BudgetAdapter.OnClickListener, B
         dialogFragment.show(supportFragmentManager, "MyDialogFragment")
     }
 
+    // Category item click listener
     override fun onItemClick(item: Item, position: Int) {
         lastItem = position
         showMyDialog(item.spendAmount, item.categoryAmount, item.categoryName)
     }
 
+    // Add new value for category
     override fun onNumberSelected(number: Double) {
         itemList.get(lastItem).categoryAmount = number
+
+        // Re-render th eUI
         binding.maxBudget.text = "of " + calculateTotalAmount(itemList).toString()
         val section1 = DonutSection(
             name = "section_1",
@@ -128,6 +133,7 @@ class BudgetGoalActivity : AppCompatActivity(), BudgetAdapter.OnClickListener, B
         budgetAdapter.notifyDataSetChanged()
     }
 
+    // Method to calculate the amount of all budget
     fun calculateTotalAmount(itemList: ArrayList<Item>): Double {
         var totalSpendAmount = 0.0
         for (item in itemList) {
@@ -136,6 +142,7 @@ class BudgetGoalActivity : AppCompatActivity(), BudgetAdapter.OnClickListener, B
         return totalSpendAmount
     }
 
+    // Get data from Local Storage
     private fun loadAmountsFromSharedPreferences(context: Context): List<Double> {
         val sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
 
@@ -149,6 +156,7 @@ class BudgetGoalActivity : AppCompatActivity(), BudgetAdapter.OnClickListener, B
         return loadedAmounts
     }
 
+    // Update category amount in Local Storage
     private fun updateCategoryAmount(category: String, newValue: Double) {
         val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -157,6 +165,8 @@ class BudgetGoalActivity : AppCompatActivity(), BudgetAdapter.OnClickListener, B
         editor.putFloat(category, newValue.toFloat())
         editor.apply()
     }
+
+    // Create local storage data if not exists
 
     private fun checkAndInitializeValues(context: Context) {
         val sharedPreferences = context.getSharedPreferences("my_prefs", Context.MODE_PRIVATE)

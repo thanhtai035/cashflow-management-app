@@ -84,6 +84,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), CardAdapter.OnI
             }
         }
 
+        // Observe transaction API response
         viewModel.transactionPage.observe(viewLifecycleOwner) {
                 response ->
             when(response) {
@@ -99,7 +100,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), CardAdapter.OnI
             }
         }
 
-        // Get Analysis Data
+        // Obserse chatbot API response for spending analtsis
         viewModel._analysis.observe(viewLifecycleOwner) {
                 response ->
             when(response) {
@@ -114,6 +115,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), CardAdapter.OnI
                     investmentScore = response.data?.investment ?: 0
                     savingScore = response.data?.saving ?: 0
                     message = response.data?.string ?: ""
+
+                    // Set UI based on data
                     binding.analysisText.visibility = View.VISIBLE
                     val score = ((spendingScore + complianceScore + investmentScore + savingScore) / 4) * 10
                     binding.totalScore.text = score.toString()
@@ -130,7 +133,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), CardAdapter.OnI
                     binding.percentageView.apply {
                         visibility = View.VISIBLE
                         setProgress(score.toFloat(), true)
-                    }                    // Enable Analysis model
+                    }
+                    // Enable Analysis modal
                     initModal()
                 }
                 is Result.Loading -> {
@@ -154,11 +158,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), CardAdapter.OnI
                         initCardPager(response.data?.getCards()?:ArrayList<Card>())
                         binding.cardShimmer.stopShimmer()
                         binding.cardShimmer.visibility = View.GONE
-                    }, 2000)
-
-                    Handler().postDelayed({
-//                        binding.progressShimmer.stopShimmer()
-//                        binding.progressShimmer.visibility = View.GONE
                     }, 2000)
 
                 }
@@ -340,8 +339,11 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), CardAdapter.OnI
         }
     }
 
+    // Method to set up chatbot view
     @SuppressLint("ClickableViewAccessibility")
     private fun initChatBot() {
+
+        // Drag drop animation
         binding.chatbot.apply {
             var dX = translationX
             var dY = translationY
@@ -387,6 +389,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), CardAdapter.OnI
                         val deltaX = currentX - previousX
                         val deltaY = currentY - previousY
                         val distance = Math.sqrt((deltaX * deltaX + deltaY * deltaY).toDouble())
+                        // Statement to diffentiate a drop and a click
                         if (distance < 220) {
                             val sheet = ChatBotFragment()
                             sheet.show(childFragmentManager, "DemoBottomSheetFragment")
@@ -401,6 +404,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), CardAdapter.OnI
         }
     }
 
+    // Set up analysis modal
     private fun initModal() {
         binding.modalBtn.setOnClickListener {
             val modalDialogFragment = ModalFragment.newInstance(spendingScore, savingScore, investmentScore, complianceScore, message)
@@ -408,6 +412,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard), CardAdapter.OnI
         }
     }
 
+    // Click on credit card
     override fun onItemClick(position: Int) {
         if (position == 0 && !transactionList.isEmpty()) {
             val sheet = CreditContentFragment.putData(Json.encodeToString(User.serializer(), user), Json.encodeToString(

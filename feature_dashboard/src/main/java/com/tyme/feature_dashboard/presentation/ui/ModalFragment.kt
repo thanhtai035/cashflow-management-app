@@ -63,6 +63,7 @@ class ModalFragment : DialogFragment(R.layout.analysis_modal) {
 
         dialog?.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
 
+        // Set the persentage bar value
         val speedScale = 1000000f
         binding.savingProgress.apply {
             setAnimationSpeedScale(speedScale)

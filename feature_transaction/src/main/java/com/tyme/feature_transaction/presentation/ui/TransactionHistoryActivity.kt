@@ -61,6 +61,7 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
             entries.clear()
             binding.pieChart.clear()
             binding.pieChart.invalidate()
+            // Radio button to change between category and overall
             when (checkID) {
                 R.id.radioButton1 -> {
                     firstPage = true
@@ -77,6 +78,7 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
             }
         }
 
+        // Observe transaction list data
         viewModel.transactionPage.observe(this) {
                 response ->
             when (response) {
@@ -100,6 +102,7 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
             viewModel.getTransactionPage(Constant.TEST_USER_ID)
         }
 
+        // Observe transaction summary data
         viewModel.transactionWeeks.observe(this) {
                 response ->
             when (response) {
@@ -119,6 +122,7 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
         super.onStart()
     }
 
+    // Method to set up piechart
     @SuppressLint("ClickableViewAccessibility")
     private fun setupPieChart() {
         val pieChart = binding.pieChart
@@ -130,7 +134,6 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
             isRotationEnabled = true
             isDragDecelerationEnabled = true
             dragDecelerationFrictionCoef = 0.1f
-
             legend.isEnabled = false
 
             centerText = createCenterTextFormatter(getCurrentSliceAt90Degrees()?.label?:"", getCurrentSliceAt90Degrees()?.value.toString() + " $")
@@ -151,6 +154,7 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
             pieChart.highlightValue(initialHighlight)
             centerText = createCenterTextFormatter(getCurrentSliceAt90Degrees()?.label?:"", getCurrentSliceAt90Degrees()?.value.toString() + "$")
 
+            // Wheel animation
             setOnTouchListener { v, event ->
                 when (event.action) {
                     MotionEvent.ACTION_MOVE -> {
@@ -175,9 +179,10 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
         }
     }
 
+    // Method to set up list transaction adapter
     private fun initTransactionAdapter(items: List<TransactionDetail>) {
         binding.swipeRefreshLayout.isRefreshing = false
-        if (viewModel.getCurrentPage() > 1) {
+        if (viewModel.getCurrentPage() > 1) { // Stack the data if load more page
             val mergedList = mutableListOf<TransactionDetail>()
             mergedList.addAll(itemList)
             mergedList.addAll(items)
@@ -185,7 +190,7 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
             transactionListAdapter.items = itemList
             transactionListAdapter.notifyDataSetChanged()
 
-        } else {
+        } else { // Load new item
             itemList = items
             transactionListAdapter = TransactionListAdapter(itemList)
             Handler().postDelayed({
@@ -205,10 +210,10 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
         }, 4000)
     }
 
+
+    // Method to set up piechart
     private fun loadPieChartData() {
-
-
-        if (!firstPage) {
+        if (!firstPage) { // Case by category
             for (item in 0 until transactionSummary.categoryDistribution.size) {
                 entries.add(
                     PieEntry(
@@ -228,7 +233,7 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
             )
             dataSet = PieDataSet(entries, "")
             dataSet.colors = colorList
-        } else {
+        } else { // Case by overall
             entries.add(PieEntry(transactionSummary.totalIncome.toFloat(), "Income"))
             entries.add(PieEntry(transactionSummary.totalOutcome.toFloat(), "Outcome"))
             val colorList = listOf(
@@ -244,6 +249,7 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
         binding.pieChart.data = data
     }
 
+    // Get the slice of the piechart at 90 degree
     private fun getCurrentSliceAt90Degrees(): PieEntry? {
         val targetAngle = 90f
         val chartRotationAngle = binding.pieChart.rotationAngle
@@ -262,6 +268,7 @@ class TransactionHistoryActivity : BaseActivity(R.layout.activity_transaction_hi
         return entries.getOrNull(closestIndex)
     }
 
+    // Set text in the center of the puechart
     private fun createCenterTextFormatter(aboveText: String, belowText: String): SpannableStringBuilder {
         val centerTextFormatter = SpannableStringBuilder()
             .append("$aboveText\n")

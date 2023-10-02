@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.github.ybq.android.spinkit.SpinKitView
-import com.tyme.feature_chatbot.ChatMessage
 import com.tyme.feature_chatbot.R
+
+// List adapter for messages
 
 class ChatAdapter(private val mContext: Context, private val dataSource: List<ChatMessage>)
     : ArrayAdapter<ChatMessage>(mContext, 0, dataSource) {
+
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val message = getItem(position)

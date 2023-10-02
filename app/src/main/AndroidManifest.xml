@@ -20,15 +20,15 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:name=".app.presentation.authentication.AuthenticationActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".app.presentation.navigation.ui.NavigationActivity"
             android:exported="true">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.tyme.feature_transaction.presentation.ui.TransactionHistoryActivity"

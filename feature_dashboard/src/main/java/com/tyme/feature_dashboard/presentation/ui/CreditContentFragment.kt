@@ -27,9 +27,11 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import kotlin.math.round
 
+// Credit card page
 class CreditContentFragment : SuperBottomSheetFragment() {
     private lateinit var binding: CreditPageItemBinding
 
+    // Pass parater
     companion object {
         private const val KEY_USER = "key_user"
         private const val KEY_TRANSACTION = "key_transaction"
@@ -51,6 +53,7 @@ class CreditContentFragment : SuperBottomSheetFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
+        // Get arguement data
         val transactions: List<TransactionWeek> = Json.decodeFromString(ListSerializer(TransactionWeek.serializer()), arguments?.getString(KEY_TRANSACTION)?:"")
         val transactionDetailList: List<TransactionDetail> = Json.decodeFromString(ListSerializer(TransactionDetail.serializer()), arguments?.getString(
             KEY_TRANSACTION_LIST)?:"")
@@ -63,6 +66,7 @@ class CreditContentFragment : SuperBottomSheetFragment() {
         binding.incomeValue.text = calculateCurrentMonthTotalIncome(transactions).toString() + " $"
         binding.outcomeValue.text = calculateCurrentMonthTotalOutcome(transactions).toString() + " $"
 
+        // Pre-process data
         val currentDate = LocalDate.now()
 
         val firstDayOfMonth = currentDate.withDayOfMonth(1)
@@ -72,10 +76,9 @@ class CreditContentFragment : SuperBottomSheetFragment() {
             dateLabels.add(currentDay.toString())
             currentDay = currentDay.plusDays(1)
         }
-
-
         val currentMonthBalanceData = calculateDailyBalances(transactionDetailList, user.balance)
 
+        // Set up balance chart
         val balanceChartModel = AAChartModel()
             .chartType(AAChartType.Line)
             .title("")
@@ -96,6 +99,7 @@ class CreditContentFragment : SuperBottomSheetFragment() {
 
         val currentMonthNetData = calculateNetIncome(transactionDetailList)
 
+        // Set up net-income chart
         val netChartModel = AAChartModel()
             .chartType(AAChartType.Line)
             .title("")
@@ -116,6 +120,8 @@ class CreditContentFragment : SuperBottomSheetFragment() {
                         .data(currentMonthNetData.toTypedArray())
                 )
             )
+
+        // Set up in/outcome chart
         val currentMonthIncomeData = calculateDailyIncomes(transactionDetailList)
         val currentMonthOutcomeData = calculateDailyOutcomes(transactionDetailList)
         val incomeOutcomeModel = AAChartModel()
@@ -150,7 +156,7 @@ class CreditContentFragment : SuperBottomSheetFragment() {
         return binding.root
     }
 
-
+    // Customize for the dialog
     override fun getExpandedHeight(): Int {
         val displayMetrics = DisplayMetrics()
         (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
@@ -169,7 +175,7 @@ class CreditContentFragment : SuperBottomSheetFragment() {
     }
 
 
-
+    // Method to get balance daily in current month
     fun calculateDailyBalances(
         transactions: List<TransactionDetail>,
         currentBalance: Double
@@ -205,6 +211,7 @@ class CreditContentFragment : SuperBottomSheetFragment() {
         return cumulativeBalances.reversed()
     }
 
+    // Method to get daily netincome this month
     fun calculateNetIncome(
         transactions: List<TransactionDetail>,
     ): List<Double> {
@@ -231,6 +238,7 @@ class CreditContentFragment : SuperBottomSheetFragment() {
         return dailyNet.reversed()
     }
 
+    // Method to get daily income this month
     fun calculateDailyIncomes(
         transactions: List<TransactionDetail>
     ): List<Double> {
@@ -257,6 +265,7 @@ class CreditContentFragment : SuperBottomSheetFragment() {
         return dailyIncomes.reversed()
     }
 
+    // Method to get daily outcome this month
     fun calculateDailyOutcomes(
         transactions: List<TransactionDetail>
     ): List<Double> {
@@ -290,6 +299,7 @@ class CreditContentFragment : SuperBottomSheetFragment() {
         return transactions.filter { it.month == currentMonth && it.year == currentYear }
     }
 
+    // Method to get total income
     fun calculateCurrentMonthTotalIncome(transactions: List<TransactionWeek>): Double {
         val currentMonth = LocalDateTime.now().monthValue
         val currentYear = LocalDateTime.now().year
@@ -299,6 +309,7 @@ class CreditContentFragment : SuperBottomSheetFragment() {
 
         return round(totalIncome * 100) / 100.0
     }
+    // Method to get total outcome
 
     fun calculateCurrentMonthTotalOutcome(transactions: List<TransactionWeek>): Double {
         val currentMonth = LocalDateTime.now().monthValue

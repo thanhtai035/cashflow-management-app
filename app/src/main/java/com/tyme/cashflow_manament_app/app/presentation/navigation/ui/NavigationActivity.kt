@@ -42,23 +42,6 @@ class NavigationActivity : BaseActivity(R.layout.activity_navigation), FragmentL
         setContentView(binding.root)
         replaceFragment(DashboardFragment())
 
-        drawerLayout = binding.parentContainer
-        binding.navigationView.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.account -> {
-//                    replaceFragment(AccountFragment())
-//                startActivity(Intent(this, AccountFragment::class.java))
-                }
-                R.id.history -> {
-                    startActivity(Intent(this, TransactionHistoryActivity::class.java))
-                }
-                R.id.budget -> {
-//                    startActivity(Intent(this, TransactionHistoryActivity:  :class.java))
-                }
-            }
-            drawerLayout.closeDrawers()
-            true
-        }
     }
 
     // Callback navigation from fragment

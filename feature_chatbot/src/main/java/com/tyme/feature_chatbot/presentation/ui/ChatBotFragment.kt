@@ -8,22 +8,16 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.DisplayMetrics
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.andrefrsousa.superbottomsheet.SuperBottomSheetFragment
-import com.google.android.material.internal.ViewUtils.dpToPx
 import com.tyme.base_feature.common.Result
-import com.tyme.feature_chatbot.ChatMessage
-import com.tyme.feature_chatbot.R
+import com.tyme.feature_chatbot.presentation.adapter.ChatMessage
 import com.tyme.feature_chatbot.databinding.ActivityChatBotBinding
-import com.tyme.feature_chatbot.databinding.FragmentChatBotBinding
 import com.tyme.feature_chatbot.presentation.adapter.ChatAdapter
 import com.tyme.feature_chatbot.presentation.viewmodel.ChatBotViewModel
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatBotFragment : SuperBottomSheetFragment() {
@@ -41,14 +35,15 @@ class ChatBotFragment : SuperBottomSheetFragment() {
 
         binding = ActivityChatBotBinding.inflate(layoutInflater)
 
-        chatAdapter = ChatAdapter(requireContext(), messages)  // <-- initialize here
+        chatAdapter = ChatAdapter(requireContext(), messages)
         binding.chatListView.adapter = chatAdapter
 
-        viewModel.receivedMessages.observe(this, { response ->
+        // Observe the response from chatbot API
+        viewModel.receivedMessages.observe(this) { response ->
             when (response) {
                 is Result.Success -> {
 
-                    messages[messages.size - 1] = ChatMessage(response.data?:"", false)
+                    messages[messages.size - 1] = ChatMessage(response.data ?: "", false)
                     chatAdapter.notifyDataSetChanged()
                     binding.chatListView.smoothScrollToPosition(chatAdapter.count)
                     binding.messageInputLayout.visibility = View.VISIBLE
@@ -57,17 +52,20 @@ class ChatBotFragment : SuperBottomSheetFragment() {
                 is Result.Loading -> {
                     binding.messageInputLayout.visibility = View.INVISIBLE
 
-                } else -> {
-                messages[messages.size - 1] = ChatMessage("Timeout. Please send another request", false)
-                chatAdapter.notifyDataSetChanged()
-                binding.chatListView.smoothScrollToPosition(chatAdapter.count)
-                binding.messageInputLayout.visibility = View.VISIBLE
+                }
+                else -> {
+                    messages[messages.size - 1] =
+                        ChatMessage("Timeout. Please send another request", false)
+                    chatAdapter.notifyDataSetChanged()
+                    binding.chatListView.smoothScrollToPosition(chatAdapter.count)
+                    binding.messageInputLayout.visibility = View.VISIBLE
 
+                }
             }
-            }
 
-        })
+        }
 
+        // Edit text listener
         binding.messageEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -84,6 +82,7 @@ class ChatBotFragment : SuperBottomSheetFragment() {
         })
 
 
+        // Microphone button listener for speech recognizer
         binding.microphoneButton.setOnClickListener {
 
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
@@ -93,6 +92,8 @@ class ChatBotFragment : SuperBottomSheetFragment() {
         return binding.root
     }
 
+
+    // SuperBottomSheet customization
     override fun isSheetAlwaysExpanded(): Boolean {
         return true
     }
@@ -113,12 +114,7 @@ class ChatBotFragment : SuperBottomSheetFragment() {
     }
 
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//
-//    }
-
+    // Callback for speech recognizer
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == AppCompatActivity.RESULT_OK) {
             val matches = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
@@ -134,12 +130,13 @@ class ChatBotFragment : SuperBottomSheetFragment() {
         private const val VOICE_RECOGNITION_REQUEST_CODE = 1
     }
 
+    // Send message request and clear edit text
     private fun sendRequest(prompt: String) {
-        Log.d("tai", "send")
         messages.add(ChatMessage(prompt,true))
         chatAdapter.notifyDataSetChanged()
         binding.messageEditText.text.clear()
 
+        // Message placeholder and loading animation
         messages.add(ChatMessage("", false, true))
         chatAdapter.notifyDataSetChanged()
         binding.chatListView.smoothScrollToPosition(chatAdapter.count)

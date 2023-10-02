@@ -45,12 +45,12 @@ class NotificationActivity : AppCompatActivity(), ObservableScrollViewCallbacks 
     }
 
 
-
     override fun onStart() {
         super.onStart()
 
 
         viewModel.initialize()
+        // Get noti data
         viewModel.notificationPage.observe(this) {
                 response ->
             when (response) {

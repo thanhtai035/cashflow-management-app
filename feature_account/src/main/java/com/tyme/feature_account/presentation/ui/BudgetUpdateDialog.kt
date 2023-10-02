@@ -30,7 +30,6 @@ class BudgetUpdateDialog : DialogFragment() {
         val currentAmount = arguments?.getDouble("arg2", 0.0)
         val category = arguments?.getString("arg3", "")
 
-        // Use the arguments to initialize your dialog
         binding.currentSpending.text = spendAmount.toString()
         binding.setValue.setText(currentAmount.toString())
 

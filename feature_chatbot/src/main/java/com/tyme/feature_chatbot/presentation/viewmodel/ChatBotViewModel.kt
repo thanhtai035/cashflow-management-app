@@ -1,15 +1,11 @@
 package com.tyme.feature_chatbot.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tyme.feature_chatbot.ChatMessage
 import com.tyme.feature_chatbot.domain.usecase.PostQuestionOpenAIUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 import com.tyme.base_feature.common.Result
 
 class ChatBotViewModel(

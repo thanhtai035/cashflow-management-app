@@ -37,7 +37,8 @@ val appModule = module {
         OkHttpClient.Builder()
             .addInterceptor(get<HttpLoggingInterceptor>())
             .connectTimeout(100, TimeUnit.SECONDS)
-            .readTimeout(100,TimeUnit.SECONDS).build()
+            .readTimeout(50,TimeUnit.SECONDS)
+            .build()
     }
 
     single {

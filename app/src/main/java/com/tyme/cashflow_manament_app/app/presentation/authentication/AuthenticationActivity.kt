@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.WindowManager
 import com.tyme.base.presentation.activity.BaseActivity
 import com.tyme.base_feature.common.Result
@@ -21,9 +22,12 @@ class AuthenticationActivity : BaseActivity(R.layout.activity_authentication_vie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Push edit text programmatically
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         binding = ActivityAuthenticationMigrationBinding.inflate(layoutInflater) //initializing the binding class
         setContentView(binding.root)
+
+        // Set card based on screen width heihgt
         val screenHeight = Resources.getSystem().displayMetrics.heightPixels
         val paramCard = binding.imageView2.layoutParams
         paramCard.width = (screenHeight * 0.35).toInt()
@@ -41,8 +45,10 @@ class AuthenticationActivity : BaseActivity(R.layout.activity_authentication_vie
                     response ->
                 when (response) {
                     is Result.Success -> {
+                        Log.d("taitest",response.message?:"")
                         // Case: Valid credential
                         if (response.data?.success?:false) {
+                            Log.d("taitest","login")
                             modalDialogFragment.cancelDialog()
                             val intent = Intent(this, NavigationActivity::class.java)
                             startActivity(intent)

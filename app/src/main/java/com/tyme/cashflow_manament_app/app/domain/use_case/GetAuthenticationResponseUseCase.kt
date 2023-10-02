@@ -17,6 +17,7 @@ class GetAuthenticationResponseUseCase (
         try {
             emit(Result.Loading<AuthenticationResponse>())
             val result = repository.getAuthenticationResponse(username,password)
+            Log.d("taitest", result.success.toString())
             emit(Result.Success<AuthenticationResponse>(result))
         } catch(e: HttpException) {
             Log.d("tai", e.toString())
